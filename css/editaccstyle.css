@@ -35,7 +35,6 @@
 	float: left;
 	margin-top: 0px;
 	margin-left: 20px;
-	font-size: 25px;
 	font-family: "Source Sans Pro";
 	font-weight: normal;
 	color: #68676D;
@@ -155,7 +154,7 @@
     margin-bottom: 15px;
 	margin-left: 25px;
     height: 30px;
-    width: 60%;
+    width: 50%;
     border-radius: 15px;
     background-color: #E8E8E8;
 	color: #7A7A7A;
@@ -183,7 +182,7 @@
     margin-bottom: 15px;
 	margin-left: 25px;
     height: 30px;
-    width: 60%;
+    width: 50%;
     border-radius: 15px;
     background-color: #E8E8E8;
 	color: #7A7A7A;
@@ -250,7 +249,6 @@
     letter-spacing: 1px;
 	margin-left: 10px;
     border-top-right-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
 }
 
 .map-link:hover, .map-link:focus {
@@ -287,7 +285,7 @@
 .left_article {
 	background-color: #343a40;
 	width: 10%;
-	height: 1150px;
+	height: 900px;
 	float: left;
 	font-family: "Source Sans Pro";
 	color: #343434;
@@ -365,7 +363,7 @@ body {
 .bg-style1 {
 	color: #000000;
 	width: 70%;
-	height: 1100px;
+	height: 850px;
 	margin-left: 5%;
  }
 
