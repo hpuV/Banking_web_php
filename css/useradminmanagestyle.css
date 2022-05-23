@@ -129,17 +129,18 @@
 	font-family: "Source Sans Pro";
 	color: #343434;
 	margin-top: 5%;
-	margin-left: 5%;
+	margin-left: 3%;
 	float: left;
 }
 
 .container .right_article table {
 	border: solid 2px #9A9A9A;
 	margin-top: 0%;
+	margin-left: 30px;
 	color: #717070;
   	border-radius: 10px;
-	width: 55%;
-	margin-bottom: 25px;
+	width: 35%;
+	float: left;
 }
 
 .container .right_article th {
@@ -245,7 +246,7 @@ body {
 .bg-style1 {
 	color: #000000;
 	/*border-radius: 20px;*/
-	width: 70%;
+	width: 100%;
  }
 
 .content-box{
