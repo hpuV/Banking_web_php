@@ -148,7 +148,7 @@ if(isset($_POST['m_username'])){
 	 <div class="clearfix"></div>
 	  <div id="mapid" style="display: none" class="map">
 		  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29455.80915183944!2d120.47031454449525!3d22.65467805683902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e178cae0b7a29%3A0x50bf59e1705a0a73!2z5ZyL56uL5bGP5p2x5aSn5a245rCR55Sf5qCh5Y2A!5e0!3m2!1szh-TW!2stw!4v1652279981894!5m2!1szh-TW!2stw" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-		  <h3>Click「search address」to closed the map.</h3>
+		  <h3>點選「搜尋地址」關閉Google地圖</h3>
       </div>
     </aside>
 	</section>

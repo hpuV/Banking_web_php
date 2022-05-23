@@ -271,14 +271,13 @@
 }
 
 .map h3{
-	padding-right: 10px;
-	padding-right: 10px;
+	text-align: center;
 	border-radius: 10px;
 	height: 30px;
 	line-height: 30px;
 	margin-top: 5px;
 	margin-bottom: 0px;
-	width: 350px;
+	width: 300px;
 	background-color: #888888;
 	color: #FFFFFF;
 }
