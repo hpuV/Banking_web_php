@@ -59,9 +59,41 @@ if (isset($_GET['queryString'])) {
         $queryString = "SELECT * FROM memberdata WHERE $searchField LIKE '%$keyWord%'";
         $result = mysqli_query($db_link,$queryString);
 
+        $data_nums = mysqli_num_rows($result); //統計總比數
+        $per = 5; //每頁顯示項目數量
+        $pages = ceil($data_nums/$per); //取得不小於值的下一個整數
+        if (!isset($_GET["page"])){ //假如$_GET["page"]未設置
+            $page=1; //則在此設定起始頁數
+        } else {
+            $page = intval($_GET["page"]); //確認頁數只能夠是數值資料
+        }
+        $start = ($page-1)*$per; //每一頁開始的資料序號
+
+        $queryString = "SELECT * FROM memberdata WHERE $searchField LIKE '%$keyWord%' LIMIT $start, $per"; 
+        $result = mysqli_query($db_link,$queryString);
+
+        $pageFirst= "?queryField=$searchField&submit=搜尋&page=1";
+        $pageList= "?queryField=$searchField&submit=搜尋&page=";
+
 }else{
     $queryString = "SELECT * FROM memberdata";
     $result = mysqli_query($db_link,$queryString);
+
+    $data_nums = mysqli_num_rows($result); //統計總比數
+    $per = 5; //每頁顯示項目數量
+    $pages = ceil($data_nums/$per); //取得不小於值的下一個整數
+    if (!isset($_GET["page"])){ //假如$_GET["page"]未設置
+        $page=1; //則在此設定起始頁數
+    } else {
+        $page = intval($_GET["page"]); //確認頁數只能夠是數值資料
+    }
+    $start = ($page-1)*$per; //每一頁開始的資料序號
+
+    $queryString = "SELECT * FROM memberdata LIMIT $start, $per"; 
+    $result = mysqli_query($db_link,$queryString);
+
+    $pageFirst= "?page=1";
+    $pageList= "?page=";
 }
 
 mysqli_close($db_link); // 連線結束
@@ -125,22 +157,23 @@ mysqli_close($db_link); // 連線結束
     <th>地址</th>
 </tr>
 <?php
-    for($i=1; $i <= mysqli_num_rows($result); $i++){
-        $rs = mysqli_fetch_row($result);
+//輸出資料內容
+while ($row = mysqli_fetch_array ($result))
+{
 ?>
-<tr style="border: 0px;">
-    <td><?php echo $rs[0]?></td>
-    <td><?php echo $rs[1]?></td>
-    <td><?php echo $rs[2]?></td>
-    <td><?php echo $rs[3]?></td>
-    <td><?php echo $rs[4]?></td>
-    <td><?php echo $rs[5]?></td>
-    <td><?php echo $rs[6]?></td>
-    <td><?php echo $rs[7]?></td>
-    <td><?php echo $rs[8]?></td>
-    <td><?php echo $rs[9]?></td>
-    <td><?php echo $rs[10]?></td>
-</tr>
+    <tr style="border: 0px;">
+        <td style="text-align: center;"><?php echo $row['m_id']; ?></td>
+        <td style="text-align: center;"><?php echo $row['m_account']; ?></td>
+        <td style="text-align: center;"><?php echo $row['m_username']; ?></td> 
+        <td style="text-align: center;"><?php echo $row['m_password']; ?></td>            
+        <td style="text-align: center;"><?php echo $row['m_nick']; ?></td> 
+        <td style="text-align: center;"><?php echo $row['m_level']; ?></td> 
+        <td style="text-align: center;"><?php echo $row['m_gender']; ?></td>
+        <td style="text-align: center;"><?php echo $row['m_birthday']; ?></td>
+        <td style="text-align: center;"><?php echo $row['m_email']; ?></td>
+        <td style="text-align: center;"><?php echo $row['m_phone']; ?></td>
+        <td style="text-align: center;"><?php echo $row['m_address']; ?></td>
+    </tr>
 <?php
     }
     if (mysqli_num_rows($result) <= 0) {
@@ -148,5 +181,18 @@ mysqli_close($db_link); // 連線結束
     }
 ?>
 </table>
+<br/>
+<?php
+    //分頁頁碼
+    echo '共 '.$data_nums.' 筆-在 '.$page.' 頁-共 '.$pages.' 頁';
+    echo "<br /><a href=$pageFirst>首頁</a> ";
+    echo "第 ";
+    for( $i=1 ; $i<=$pages ; $i++ ) {
+        if ( $page-3 < $i && $i < $page+3 ) {
+            echo "<a href=$pageList".$i.">".$i."</a> ";
+        }
+    } 
+    echo " 頁 <a href=$pageList".$pages.">末頁</a><br /><br />";
+?>
 </body>
 </html>
