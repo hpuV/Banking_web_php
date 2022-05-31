@@ -203,17 +203,17 @@ mysqli_close($db_link); // 連線結束
      </div>
 	 <div class="clearfix"></div>
      <div class="page">
-		 <div class="top"><?php echo '共 '.$data_nums.' 筆 在 '.$page.' 頁 共 '.$pages.' 頁';?></div>
-         <div class="sec">
-			 <?php echo "<a href=$pageFirst>首頁</a>";?>
-			 第<?php
-             for( $i=1 ; $i<=$pages ; $i++ ) {
+		<div class="top"><?php echo '共 '.$data_nums.' 筆 在 '.$page.' 頁 共 '.$pages.' 頁';?></div>
+        <div class="sec">
+			<?php echo "<a href=$pageFirst>首頁</a>";?>
+			第<?php
+            for( $i=1 ; $i<=$pages ; $i++ ) {
                 if ( $page-3 < $i && $i < $page+3 ) {
                     echo "<a href=$pageList".$i.">".$i."</a>";
                 }
             }?>
 			<?php echo " 頁 <a href=$pageList".$pages.">末頁</a>";?>
-		 </div>
+		</div>
 	 </div>
 	 <div class="clearfix"></div>
     </aside>
