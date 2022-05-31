@@ -60,37 +60,49 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['
       exit();
     }
 
-  $settime=strtotime('+7 hours');
-  $gettime=date('YmdHis',$settime);
-
-  if(!empty($_POST['m_username'])){
-    $in_username= $_POST['m_username'];
-    $in_password= $_POST['m_password'];
-    $in_nickname=$_POST['m_nick'];
-    $in_level= $_POST['m_level'];
-    $in_gender= $_POST['m_gender'];
-    $in_bday= $_POST['m_bday'];
-    $in_email= $_POST['m_email'];
-    $in_phone= $_POST['m_phone'];
-    $in_address= $_POST['m_address'];
+  if(isset($_POST['username'])){
+    $in_username= $_POST['username'];
+    $in_password= $_POST['password'];
+    $in_nickname=$_POST['nickname'];
+    $in_level= $_POST['level'];
+    $in_gender= $_POST['gender'];
+    $in_bday= $_POST['bday'];
+    $in_email= $_POST['email'];
+    $in_phone= $_POST['phone'];
+    $in_address= $_POST['address'];
 
     $in_account = rand(10,99999999);
     $in_account = sprintf("%09d",$in_account);
 
-      $sql="INSERT INTO memberdata 
+    $sql="INSERT INTO memberdata 
             VALUE(NULL,'$in_account','$in_username','$in_password','$in_nickname','$in_level','$in_gender','$in_bday','$in_email','$in_phone','$in_address');";
-      mysqli_query($db_link,$sql);
+
+    if(mysqli_query($db_link,$sql)){
+      function_alert("Create Account Successfully!");
+    }else{
+      function_alert("Error creating table: ".mysqli_error($db_link));
+    }
+  }
+
+  function function_alert($message) { 
+      
+    // Display the alert box  
+    echo "<script>alert('$message');
+     window.location.href='createacc.php';
+    </script>"; 
+    
+    return false;
   }
   ?>
   <form action="" method="post" enctype="multipart/form-data">
-	<div class="bg-style1" href="#">
+	<div class="bg-style1">
    	    <h1>新增會員</h1>
 		  <h2 class="lbl1">帳號</h2>
 		  <input type="text" name="username" class="txt">
 		  <h2 class="lbl1">密碼</h2>
 		  <input type="password" name="username" class="txt">
 		  <h2 class="lbl2">等級</h2>
-		  <select name="m_level" class="select">
+		  <select name="level" class="select">
           <option value="0">無</option>
           <option value="1">用戶</option>
           <option value="2">管理者</option>
