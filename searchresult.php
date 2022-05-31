@@ -203,7 +203,7 @@ mysqli_close($db_link); // 連線結束
      </div>
 	 <div class="clearfix"></div>
      <div class="page">
-		 <div class="top"><?php echo '共 '.$data_nums.' 筆-在 '.$page.' 頁-共 '.$pages.' 頁';?></div>
+		 <div class="top"><?php echo '共 '.$data_nums.' 筆 在 '.$page.' 頁 共 '.$pages.' 頁';?></div>
          <div class="sec">
 			 <?php echo "<a href=$pageFirst>首頁</a>";?>
 			 第<?php
