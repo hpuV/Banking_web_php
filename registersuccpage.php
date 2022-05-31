@@ -1,5 +1,5 @@
 <?php
-	header("Refresh: 3; url=index.php");
+	header("Refresh: 10; url=index.php");
 ?>
 <!doctype html>
 <html>
@@ -26,7 +26,6 @@
        </div>
     </article>
 	</section>
-
 </div>
 </body>
 </html>

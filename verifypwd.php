@@ -17,18 +17,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     mysqli_select_db($db_link, "phpmember");
     $updateDB = mysqli_query($db_link,$sqlUPdate);
     if($updateDB){
-      echo "更改成功!<br> 3秒後將自動跳轉至登入頁面<br>";
-      echo "<a href='logout.php'>未成功跳轉頁面請點擊此</a>";
-      header("refresh:32;url=logout.php");
+      header("location: verifypwdsuccess.php");
       exit;
 
     }else{
       echo "Error creating table: " . mysqli_error($db_link);
     }
   }else{
-    echo "舊密碼輸入錯誤!<br> 3秒後將自動跳轉頁面<br>";
-    echo "<a href='editpwd.php'>未成功跳轉頁面請點擊此</a>";
-    header("refresh:32;url=editpwd.php");
+    header("location: verifypwdfail.php");
   }
 }
 

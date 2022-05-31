@@ -1,5 +1,5 @@
 <?php
-	header("Refresh: 10; url=register.php");
+	header("Refresh: 10; url=editpwd.php");
 ?>
 <!doctype html>
 <html>
@@ -20,13 +20,12 @@
   <section>
     <article class="succ_article">
 	  <div class="bg-style1" href="#">
-		  <h1 class="lbl1">Account has been used!</h1>
+		  <h1 class="lbl1">舊密碼輸入錯誤!</h1>
 		  <h2>3秒後將自動跳轉頁面</h2>
-		  <h2 class="lbl2"><a href="register.php" class="lbl-link">未成功跳轉頁面請點擊此</a></h2>
+		  <h2 class="lbl2"><a href="editpwd.php" class="lbl-link">未成功跳轉頁面請點擊此</a></h2>
        </div>
     </article>
 	</section>
-
 </div>
 </body>
 </html>

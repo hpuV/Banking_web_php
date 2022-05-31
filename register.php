@@ -47,13 +47,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         mysqli_query($db_link, $sqlgold);
 
         if(mysqli_query($db_link, $sqlmember)){
-            header("registersuccpage.php");
+            header("location: registersuccpage.php");
         }else{
             echo "Error creating table: " . mysqli_error($db_link);
         }
     }
     else{
-        header("registerfailpage.php");
+        header("location: registerfailpage.php");
     }
 }
 
