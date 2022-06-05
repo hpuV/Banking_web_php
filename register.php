@@ -29,8 +29,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $expday = $year."/".date('m/d');
 
 
-    //檢查帳號是否重複
-    //還差帳號
+    //新增帳號: 會員資料(memberdata) 資產(finance) 信用卡(debitcard) 黃金(gold) 股票(stock)
     $check="SELECT * FROM memberdata WHERE m_username='".$username."'";
     if(mysqli_num_rows(mysqli_query($db_link,$check))==0){
         $sqlmember="INSERT INTO memberdata (m_id, m_account , m_username, m_password, m_nick , m_level , m_gender , m_birthday , m_email , m_phone , m_address)
@@ -41,10 +40,27 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             VALUES (NULL ,'".$cardid."' ,'".$account."' ,'".$expday."' ,'".$safecode."' ,'0')";
         $sqlgold="INSERT INTO golddata (g_id, m_gold, m_goldnum)
             VALUES (NULL ,'".$gold."' ,'0')";
+        
+        $sql2330="INSERT INTO personalstockdata 
+        VALUES (NULL,'".$stock."','".$account."','2330','臺積電','0');";
+        $sql3008="INSERT INTO personalstockdata 
+        VALUES (NULL,'".$stock."','".$account."','3008','大立光','0');";
+        $sql2409="INSERT INTO personalstockdata 
+        VALUES (NULL,'".$stock."','".$account."','2409','友達','0');";
+        $sql2603="INSERT INTO personalstockdata 
+        VALUES (NULL,'".$stock."','".$account."','2603','長榮','0');";
+        $sql0050="INSERT INTO personalstockdata 
+        VALUES (NULL,'".$stock."','".$account."','0050','元大臺灣50','0');";
 
         mysqli_query($db_link, $sqlfinance);
         mysqli_query($db_link, $sqldebitcard);
         mysqli_query($db_link, $sqlgold);
+
+        mysqli_query($db_link, $sql2330);
+        mysqli_query($db_link, $sql3008);
+        mysqli_query($db_link, $sql2409);
+        mysqli_query($db_link, $sql2603);
+        mysqli_query($db_link, $sql0050);
 
         if(mysqli_query($db_link, $sqlmember)){
             header("location: registersuccpage.php");
