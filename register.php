@@ -42,15 +42,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             VALUES (NULL ,'".$gold."' ,'0')";
         
         $sql2330="INSERT INTO personalstockdata 
-        VALUES (NULL,'".$stock."','".$account."','2330','臺積電','0');";
+        VALUES (NULL,'".$stock."','".$account."','2330','臺積電','0')";
         $sql3008="INSERT INTO personalstockdata 
-        VALUES (NULL,'".$stock."','".$account."','3008','大立光','0');";
+        VALUES (NULL,'".$stock."','".$account."','3008','大立光','0')";
         $sql2409="INSERT INTO personalstockdata 
-        VALUES (NULL,'".$stock."','".$account."','2409','友達','0');";
+        VALUES (NULL,'".$stock."','".$account."','2409','友達','0')";
         $sql2603="INSERT INTO personalstockdata 
-        VALUES (NULL,'".$stock."','".$account."','2603','長榮','0');";
+        VALUES (NULL,'".$stock."','".$account."','2603','長榮','0')";
         $sql0050="INSERT INTO personalstockdata 
-        VALUES (NULL,'".$stock."','".$account."','0050','元大臺灣50','0');";
+        VALUES (NULL,'".$stock."','".$account."','0050','元大臺灣50','0')";
 
         mysqli_query($db_link, $sqlfinance);
         mysqli_query($db_link, $sqldebitcard);
