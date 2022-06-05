@@ -34,10 +34,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(mysqli_num_rows(mysqli_query($db_link,$check))==0){
         $sqlmember="INSERT INTO memberdata (m_id, m_account , m_username, m_password, m_nick , m_level , m_gender , m_birthday , m_email , m_phone , m_address)
             VALUES(NULL ,'".$account."' ,'".$username."' ,'".$password."' ,'".$nickname."' , '0' ,'".$gender."' ,'".$bday."','".$email."','".$phone."','".$address."')";
-        $sqlfinance="INSERT INTO financedata (f_id, m_swiftcode, m_account , m_balance, m_creditbalance, m_gold , m_cardid , m_stock)
-            VALUES (NULL ,'868' ,'".$account."' ,'0'  ,'0' , '".$gold."' ,'".$cardid."' ,'".$stock."')";
-        $sqldebitcard="INSERT INTO debitcarddata (d_id, m_cardid, m_account , m_expdate, m_safecode, m_creditbalance)
-            VALUES (NULL ,'".$cardid."' ,'".$account."' ,'".$expday."' ,'".$safecode."' ,'0')";
+        $sqlfinance="INSERT INTO financedata (f_id, m_swiftcode, m_account , m_balance, m_gold , m_cardid , m_stock)
+            VALUES (NULL ,'868' ,'".$account."' ,'0' , '".$gold."' ,'".$cardid."' ,'".$stock."')";
+        $sqldebitcard="INSERT INTO debitcarddata (d_id, m_cardid, m_account , m_expdate, m_safecode)
+            VALUES (NULL ,'".$cardid."' ,'".$account."' ,'".$expday."' ,'".$safecode."')";
         $sqlgold="INSERT INTO golddata (g_id, m_gold, m_goldnum)
             VALUES (NULL ,'".$gold."' ,'0')";
         
