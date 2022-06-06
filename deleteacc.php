@@ -20,7 +20,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['
           ?>(<a href="logout.php" class="logout">登出</a>)
   </td>
   <td><a href="usercenter.php" class="headStr">個人資料</a></td>
-  <td class="headNow"><a href="useradminmanage.php" class="headStr">會員管理</a></td>
+  <td class="headNow"><a href="editaccadmin.php" class="headStr">會員管理</a></td>
   <td><a href="createacc.php" class="headStr">新增會員</a></td>
  </tr>
 </table><br /><br />
@@ -37,11 +37,11 @@ mysqli_select_db($db_link, "phpmember");
 
 if(array_key_exists("yes",$_POST)){
   mysqli_query($db_link,$sqlDelete);
-  header("location:useradminmanage.php");
+  header("location:editaccadmin.php");
 }
 
 if(array_key_exists("no",$_POST)){
-  header("location:useradminmanage.php");
+  header("location:editaccadmin.php");
 }
 
 ?>

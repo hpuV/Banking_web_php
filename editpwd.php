@@ -45,7 +45,7 @@
         <?php
           if($_SESSION['level']>=2){
         ?>
-        <h3><a class="nav-info" href="useradminmanage.php">會員管理</a></h3>
+        <h3><a class="nav-info" href="editaccadmin.php">會員管理</a></h3>
 		    <h3><a class="nav-info" href="createacc.php">新增會員</a></h3>
 		    <h3><a class="nav-info" href="searchresult.php">查詢會員</a></h3>
         <?php

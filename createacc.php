@@ -49,7 +49,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['
       <h3 class="toph3"><a class="nav-info" href="useradmincenter.php">個人資料</a></h3>
       <h3><a class="nav-info" href="editacc.php">變更資料</a></h3>
       <h3><a class="nav-info" href="editpwd.php">更改密碼</a></h3>
-		  <h3><a class="nav-info" href="useradminmanage.php">會員管理</a></h3>
+		  <h3><a class="nav-info" href="editaccadmin.php">會員管理</a></h3>
 		  <h3><a class="nav-info" href="createacc.php">新增會員</a></h3>
 		  <h3><a class="nav-info" href="searchresult.php">查詢會員</a></h3>
   </article>
