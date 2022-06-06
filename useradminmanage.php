@@ -6,7 +6,17 @@ session_start();
 
 $levelString = array("無","用戶","管理者");
 
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['level']>=2){
+//if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['level']>=2){
+
+	if(isset($_POST['dataid'])){
+		$id = $_POST['dataid'];
+		$sql= "SELECT * FROM memberdata WHERE m_id = '".$id."' ";
+		$ro = mysqli_query($db_link,$sql);
+		$row = mysqli_fetch_assoc($ro);
+
+		$_SESSION["sess_account"] = $row['m_account'];
+	}
+
 
 ?>
 <!doctype html>
@@ -46,6 +56,14 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['
 		<h3><a class="nav-info" href="searchresult.php">查詢會員</a></h3>
 	</article>
     <aside class="right_article">
+	<form action="editaccadmin.php" method="post" enctype="multipart/form-data">
+	<div class="search">
+		<div class="lbl1">更改資料編號</div>
+		<input type="text" name="dataid" class="txt">
+		<input name="edit" type="submit" value="修改" class= "btn"/>
+	</div>
+	</form>
+	<div class="clearfix"></div>
 	<div class="bg-style1">
 	<?php
 		$sql="SELECT * FROM memberdata";
@@ -69,17 +87,13 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['
 				<tr>
 					<th class="title">身份:</th>
 					<td><?php echo $levelString[$row['m_level']]; ?></td>
-					<td><a href="editaccadmin.php?">修改</a></td>
-					<td><a href="deleteacc.php?<?php
-						$_SESSION["delete_account"] = $row['m_account'];
-						?>">刪除</a>
-					</td>
 				</tr>
 			</table>
 	<?php
   		};
 	?>
      </div>
+	 </form>
 	 <div class="clearfix"></div>
   	 <div class="content-box"></div>
     </aside>
@@ -90,9 +104,3 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['
 </div>
 </body>
 </html>
-<?php
-   }else{
-      echo "非法登入!";
-      exit();
-  }
-?>

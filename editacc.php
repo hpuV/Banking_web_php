@@ -122,35 +122,35 @@ if(isset($_POST['m_username'])){
     ?>
 	</article>
     <aside class="right_article">
-	<div class="bg-style1" href="#">
-   	    <h1>更改資料</h1>
-		  <h2 class="lbl1">帳號</h2>
-		  <input name="m_username" type="text" value="<?php echo $up_username;?>" class="txt">
-		  <h2 class="lbl1">名稱</h2>
-		  <input name="m_nick" type="text"  value="<?php echo $up_nickname;?>" class="txt">
-		  <h2 class="lbl2">性別</h2>
-		  <select name="m_gender" class="select">
-          	<option value="男">Male</option>
-          	<option value="女">Female</option>
-          	<option value="其他">Other</option>
+      <div class="bg-style1">
+          <h1>更改資料</h1>
+          <h2 class="lbl1">帳號</h2>
+          <input name="m_username" type="text" value="<?php echo $up_username;?>" class="txt">
+          <h2 class="lbl1">名稱</h2>
+          <input name="m_nick" type="text"  value="<?php echo $up_nickname;?>" class="txt">
+          <h2 class="lbl2">性別</h2>
+          <select name="m_gender" class="select">
+            <option value="男">Male</option>
+            <option value="女">Female</option>
+            <option value="其他">Other</option>
           </select>
-		  <h2 class="lbl1">生日</h2>
-		  <input type="date" id="bday" name="m_bday" value="<?php echo $up_bday;?>" class="day">
-		  <h2 class="lbl1">電子信箱</h2>
-		  <input name="m_email" type="text"  value="<?php echo $up_email;?>" class="txt">
-		  <h2 class="lbl1">手機號碼</h2>
-		  <input name="m_phone" type="text"  value="<?php echo $up_phone;?>" class="txt">
-		  <h2 class="lbl1">地址</h2>
-		  <input type="text" name="m_address" value="<?php echo $up_address;?>" class="txtmap">
-		  <a href="javascript:;" class="map-link" onclick="showOrHide()">查詢地圖</a>
-		  <input type="submit" value="確認修改" name="submit" class="btn">
-       </div>
-	 <div class="clearfix"></div>
-	  <div id="mapid" style="display: none" class="map">
-		  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29455.80915183944!2d120.47031454449525!3d22.65467805683902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e178cae0b7a29%3A0x50bf59e1705a0a73!2z5ZyL56uL5bGP5p2x5aSn5a245rCR55Sf5qCh5Y2A!5e0!3m2!1szh-TW!2stw!4v1652279981894!5m2!1szh-TW!2stw" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-		  <h3>點選「搜尋地址」關閉Google地圖</h3>
+          <h2 class="lbl1">生日</h2>
+          <input type="date" id="bday" name="m_bday" value="<?php echo $up_bday;?>" class="day">
+          <h2 class="lbl1">電子信箱</h2>
+          <input name="m_email" type="text"  value="<?php echo $up_email;?>" class="txt">
+          <h2 class="lbl1">手機號碼</h2>
+          <input name="m_phone" type="text"  value="<?php echo $up_phone;?>" class="txt">
+          <h2 class="lbl1">地址</h2>
+          <input type="text" name="m_address" value="<?php echo $up_address;?>" class="txtmap">
+          <a href="javascript:;" class="map-link" onclick="showOrHide()">查詢地圖</a>
+          <input type="submit" value="確認修改" name="submit" class="btn">
       </div>
-    </aside>
+      <div class="clearfix"></div>
+      <div id="mapid" style="display: none" class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29455.80915183944!2d120.47031454449525!3d22.65467805683902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e178cae0b7a29%3A0x50bf59e1705a0a73!2z5ZyL56uL5bGP5p2x5aSn5a245rCR55Sf5qCh5Y2A!5e0!3m2!1szh-TW!2stw!4v1652279981894!5m2!1szh-TW!2stw" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <h3>點選「搜尋地址」關閉Google地圖</h3>
+      </div>
+  </aside>
 	</section>
   <footer class="tertiary_header footer">
     <div class="copyright">Copyright &copy;<strong> Chin-An Liu.</strong> All rights reserved.</div>

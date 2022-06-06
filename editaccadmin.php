@@ -4,7 +4,7 @@ include('connect.php');
 
 session_start();
 
-$account = $_SESSION["account"];
+$account = $_SESSION["sess_account"];
 $sql = "SELECT * FROM memberdata WHERE m_account = '".$account."' ";
 $result = mysqli_query($db_link,$sql);
 $row_Login = mysqli_fetch_assoc($result);
@@ -39,10 +39,12 @@ if(isset( $row_Login['m_account'])){
   $up_account= $row_Login['m_account'];
   $up_username= $row_Login['m_username'];
   $up_nickname= $row_Login['m_nick'];
+  $up_account= $row_Login['m_account'];
   $up_level= $row_Login['m_level'];
 }else{
   $up_username= "";
   $up_nickname= "";
+  $up_account= "";
   $up_level= "1";
 }
 
@@ -50,10 +52,12 @@ if(isset($_POST['m_username'])){
   $up_username= $_POST['m_username'];
   $up_nick= $_POST['m_nick'];
   $up_level= $_POST['m_level'];
+  $up_account= $_POST['m_account'];
   $sqlUPdate= "UPDATE memberdata
         SET m_username= '.$up_username.',
             m_level= '.$up_level.',
-            m_nick= '.$up_nickname.'
+            m_nick= '.$up_nickname.',
+            m_account= '.$up_account.'
             WHERE m_account= '.$up_account.'; ";
   
   mysqli_select_db($db_link, "phpmember");
@@ -89,8 +93,17 @@ if(isset($_POST['m_username'])){
     </td>
   </tr>
   <tr>
+    <td class="title">帳號</td> 
+    <td class="content">
+      <input name="m_account" type="text" value="<?php echo $up_account;?>" />
+    </td>
+  </tr>
+  <tr>
     <td colspan="2" style="text-align:center;">
       <input name="" type="submit" value="確認修改" />
+    </td>
+    <td>
+      <a href="deleteacc.php">刪除</a>
     </td>
   </tr>
 </table>

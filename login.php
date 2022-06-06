@@ -12,7 +12,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $sql = "SELECT * FROM memberdata WHERE m_username = '".$username."' ";
     $result = mysqli_query($db_link,$sql);
-     $row_Login = mysqli_fetch_assoc($result);
+    $row_Login = mysqli_fetch_assoc($result);
 
     if(mysqli_num_rows($result)==1 && $passwd ==  $row_Login["m_password"]){
         session_start();
