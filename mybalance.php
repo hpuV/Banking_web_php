@@ -12,45 +12,65 @@ $sql = "SELECT * FROM financedata WHERE m_account = '".$account."' ";
 $result = mysqli_query($db_link,$sql);
 $row_Login = mysqli_fetch_assoc($result);
 
-$levelString = array("無","用戶","管理者");
-
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 
 ?>
-<DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<title>會員中心</title>
-<link href="user.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content..="chrome=1">
+<meta name="viewport" content..="width=device-width, initial-scale=1">
+<title>銀行網站</title>
+<link href="css/mybalancestyle.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+</style>
 </head>
 <body>
- <table>
-  <tr class="headbar">
-    <td><a href="twdtransfer.php">臺幣轉帳</a></td>
-    <td><a href="statementsearch.php">收支管理</a></td>
-  </tr>
- </table><br /><br />
- <table class="userInfo">
-  <tr>
-    <td class="colTitle">銀行帳號: </td>
-    <td class="colLeft"><?php echo $account; ?></td>
-  </tr>
-  <tr>
-    <td class="colTitle">臺幣帳戶餘額: </td>
-    <td class="colLeft"><?php echo $row_Login["m_balance"]; ?></td>
-  </tr>
-  <tr>
-    <td><a href='debitcardcenter.php'>
-      <input type="button" value="金融卡卡片管理" style = "width:120px; height:30px; font-size: 15px;">
-    </a></td>
-</tr>
-</table>
+<div class="container">
+  <header>
+	 <nav class="primary_header" id="menu">
+      <ul>
+        <a class="h1title">Banking</a>
+        <li><a class="nav-link" href="mainpage.php">首頁</a></li>
+        <li><a class="nav-link" href="goldprice.php">黃金價格</a></li>
+        <li><a class="nav-link" href="stockprice.php">股票價格</a></li>
+        <li><a class="nav-link" href="userdeter.php">會員中心</a></li>
+        <li><a class="nav-link" href="statementsearch.php">收支查詢</a></li>
+		    <li><a class="nav-link" href="logout.php">登出</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+	<div class="top-box"></div>
+	<div class="left_article">
+		<h3 class="first"><a class="nav-info" href="twdtransfer.php">臺幣轉帳</a></h3>
+        <h3 class="second"><a class="nav-info" href="debitcardcenter.php">金融卡管理</a></h3>  
+	</div>
+	<div class="clearfix"></div>
+    <aside class="right_article">
+	<div class="bg-style1">
+		<h2>我的臺幣</h2>
+		<div class="value"><h3><?php echo $account; ?></h3></div>
+	    <div class="content"><h4>銀行帳戶</h4></div>
+		<div class="value"><h3><?php echo $row_Login["m_balance"]; ?></h3></div>
+	    <div class="content"><h4>臺幣帳戶餘額</h4></div>
+		<hr>
+     </div>
+	 <div class="clearfix"></div>
+  	 <div class="content-box"></div>
+    </aside>
+	</section>
+  <footer class="tertiary_header footer">
+    <div class="copyright">Copyright &copy;<strong> Chin-An Liu.</strong> All rights reserved.</div>
+  </footer>
+</div>
+</body>
+</html>
 <?php
   }else{
      echo "非法登入!";
      exit();
 }
 ?>
-</body>
-</html>
 
