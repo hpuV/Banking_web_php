@@ -6,17 +6,7 @@ session_start();
 
 $levelString = array("無","用戶","管理者");
 
-//if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['level']>=2){
-
-	if(isset($_POST['dataid'])){
-		$id = $_POST['dataid'];
-		$sql= "SELECT * FROM memberdata WHERE m_id = '".$id."' ";
-		$ro = mysqli_query($db_link,$sql);
-		$row = mysqli_fetch_assoc($ro);
-
-		$_SESSION["sess_account"] = $row['m_account'];
-	}
-
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['level']>=2){
 
 ?>
 <!doctype html>
@@ -56,14 +46,6 @@ $levelString = array("無","用戶","管理者");
 		<h3><a class="nav-info" href="searchresult.php">查詢會員</a></h3>
 	</article>
     <aside class="right_article">
-	<form action="editaccadmin.php" method="post" enctype="multipart/form-data">
-	<div class="search">
-		<div class="lbl1">更改資料編號</div>
-		<input type="text" name="dataid" class="txt">
-		<input name="edit" type="submit" value="修改" class= "btn"/>
-	</div>
-	</form>
-	<div class="clearfix"></div>
 	<div class="bg-style1">
 	<?php
 		$sql="SELECT * FROM memberdata";
@@ -93,7 +75,6 @@ $levelString = array("無","用戶","管理者");
   		};
 	?>
      </div>
-	 </form>
 	 <div class="clearfix"></div>
   	 <div class="content-box"></div>
     </aside>
@@ -104,3 +85,8 @@ $levelString = array("無","用戶","管理者");
 </div>
 </body>
 </html>
+<?php
+}else{
+	exit;
+}
+?>
