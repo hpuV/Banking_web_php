@@ -6,59 +6,78 @@ session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['level']>=2){
 ?>
-<DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<title>刪除會員資料</title>
-<link href="user.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content..="chrome=1">
+<meta name="viewport" content..="width=device-width, initial-scale=1">
+<title>銀行網站</title>
+<link href="css/deleteaccstyle.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+</style>
 </head>
 <body>
-<table>
- <tr class="headbar">
-  <td>歡迎<?php
-          echo $_SESSION['nickname']; 
-          ?>(<a href="logout.php" class="logout">登出</a>)
-  </td>
-  <td><a href="usercenter.php" class="headStr">個人資料</a></td>
-  <td class="headNow"><a href="editaccadmin.php" class="headStr">會員管理</a></td>
-  <td><a href="createacc.php" class="headStr">新增會員</a></td>
- </tr>
-</table><br /><br />
-<?php
-}else{
-  echo "非法登入!";
-  exit();
- }
+<div class="container">
+  <header>
+	 <nav class="primary_header" id="menu">
+      <ul>
+        <a class="h1title">Banking</a>
+        <li><a class="nav-link" href="mainpage.php">首頁</a></li>
+        <li><a class="nav-link" href="goldprice.php">黃金價格</a></li>
+        <li><a class="nav-link" href="stockprice.php">股票價格</a></li>
+        <li><a class="nav-link" href="userdeter.php">會員中心</a></li>
+        <li><a class="nav-link" href="statementsearch.php">收支查詢</a></li>
+		    <li><a class="nav-link" href="logout.php">登出</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="top-box"></div>
+  <div class="cssload-loader">
+		<div class="cssload-inner cssload-one"></div>
+		<div class="cssload-inner cssload-two"></div>
+		<div class="cssload-inner cssload-three"></div>
+	  </div>
+    <?php
+      }else{
+        echo "非法登入!";
+        exit();
+      }
 
-$de_account = $_SESSION["sess_account"];
-//echo $de_id;
-$sqlDelete= "DELETE FROM memberdata WHERE m_account = '".$de_account."'";
-mysqli_select_db($db_link, "phpmember");
+      $de_account = $_SESSION["sess_account"];
+      //echo $de_id;
+      $sqlDelete= "DELETE FROM memberdata WHERE m_account = '".$de_account."'";
+      mysqli_select_db($db_link, "phpmember");
 
-if(array_key_exists("yes",$_POST)){
-  mysqli_query($db_link,$sqlDelete);
-  header("location:editaccadmin.php");
-}
+      if(array_key_exists("yes",$_POST)){
+        mysqli_query($db_link,$sqlDelete);
+        header("location:editaccadmin.php");
+      }
 
-if(array_key_exists("no",$_POST)){
-  header("location:editaccadmin.php");
-}
+      if(array_key_exists("no",$_POST)){
+        header("location:editaccadmin.php");
+      }
 
-?>
-<form method="post">
-<table class="deleteuser">
-  <tr>
-    <td colspan="2" align="center">是否要刪除帳號</td>
-  </tr>
-  <tr>
-    <td>
-      <input name="yes" type="submit" value="是" />
-    </td>
-    <td>
-      <input name="no" type="submit" value="否" />
-    </td>
-  </tr>
-</table>
-</form>
+    ?>
+  <section>
+  <form method="post">
+    <article class="succ_article">
+	  <div class="bg-style1" href="#">
+		  <h1 class="lbl1">是否要刪除帳號</h1>
+		  <div class="option">
+		  <h2 class="leftBtn"><input name="yes" type="submit" value="是" class="btn"></h2>
+		  <h2 class="rightBtn"><input name="no" type="submit" value="否" class="btn"></h2>
+		  </div>
+		  <div class="clearfix"></div>
+       </div>
+    </article>
+  </form>
+  </section>
+	 <div class="clearfix"></div>
+  	 <div class="content-box"></div>
+  <footer class="tertiary_header footer">
+    <div class="copyright">Copyright &copy;<strong> Chin-An Liu.</strong> All rights reserved.</div>
+  </footer>
+</div>
 </body>
 </html>

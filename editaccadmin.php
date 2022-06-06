@@ -9,6 +9,9 @@ if(isset($_GET['dataid'])){
   $sql = "SELECT * FROM memberdata WHERE m_id = '".$dataid."' ";
   $result = mysqli_query($db_link,$sql);
   $row_Login = mysqli_fetch_assoc($result);
+
+  $up_account = $row_Login['m_account'];
+  $_SESSION["sess_account"] = $up_account;
 }
 ?>
 <!doctype html>
@@ -48,30 +51,25 @@ if(isset($_GET['dataid'])){
 		<h3><a class="nav-info" href="searchresult.php">查詢會員</a></h3>
 	</article>
   <?php
-    if(isset( $row_Login['m_account'])){
+    if(isset($up_account)){
       $up_id= $row_Login['m_id'];
-      $up_account= $row_Login['m_account'];
       $up_username= $row_Login['m_username'];
       $up_nickname= $row_Login['m_nick'];
-      $up_account= $row_Login['m_account'];
       $up_level= $row_Login['m_level'];
     }else{
       $up_username= "";
       $up_nickname= "";
-      $up_account= "";
-      $up_level= "1";
+      $up_level= "0";
     }
 
     if(isset($_POST['username'])){
       $up_username= $_POST['username'];
       $up_nick= $_POST['nickname'];
       $up_level= $_POST['level'];
-      $up_account= $_POST['account'];
       $sqlUPdate= "UPDATE memberdata
             SET m_username= '.$up_username.',
                 m_level= '.$up_level.',
                 m_nick= '.$up_nickname.',
-                m_account= '.$up_account.'
                 WHERE m_account= '.$up_account.'; ";
       
       mysqli_select_db($db_link, "phpmember");
@@ -96,13 +94,11 @@ if(isset($_GET['dataid'])){
 		  <h2 class="lbl2">名稱</h2>
 		  <input type="text" name="nickname" id="nickname" value="<?php echo $up_nickname;?>" class="txt2">
 		  <h2 class="lbl3">等級</h2>
-		  <select name="level" value="<?php echo $up_level;?>" class="select">
+		  <select name="level" class="select">
           	<option value="0">無</option>
-          	<option value="1">用戶</option>
+          	<option value="1" selected>用戶</option>
           	<option value="2">管理者</option>
           </select>
-		  <h2 class="lbl2">銀行帳號</h2>
-		  <input name="account" type="text" value="<?php echo $up_account;?>" class="txt2">
 		  <div class="box"></div>
 		  <input type="submit" value="確認修改" name="submit" class="editbtn">
 		  <a href="deleteacc.php"><input type="" value="刪除" name="" class="editbtn"></a>
