@@ -4,109 +4,117 @@ include('connect.php');
 
 session_start();
 
-$account = $_SESSION["sess_account"];
-$sql = "SELECT * FROM memberdata WHERE m_account = '".$account."' ";
-$result = mysqli_query($db_link,$sql);
-$row_Login = mysqli_fetch_assoc($result);
-
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['level']>=2){
+if(isset($_GET['dataid'])){
+  $dataid = $_GET['dataid'];
+  $sql = "SELECT * FROM memberdata WHERE m_id = '".$dataid."' ";
+  $result = mysqli_query($db_link,$sql);
+  $row_Login = mysqli_fetch_assoc($result);
+}
 ?>
-<DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<title>修改會員資料</title>
-<link href="user.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content..="chrome=1">
+<meta name="viewport" content..="width=device-width, initial-scale=1">
+<title>銀行網站</title>
+<link href="css/editaccadminstyle.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+</style>
 </head>
 <body>
-<table>
- <tr class="headbar">
-  <td>歡迎<?php
-          echo $_SESSION['nickname']; 
-          ?>(<a href="logout.php" class="logout">登出</a>)
-  </td>
-  <td><a href="usercenter.php" class="headStr">個人資料</a></td>
-  <td class="headNow"><a href="useradminmanage.php" class="headStr">會員管理</a></td>
-  <td><a href="createacc.php" class="headStr">新增會員</a></td>
- </tr>
-</table><br /><br />
-<?php
-}else{
-  echo "非法登入!";
-  exit();
- }
-if(isset( $row_Login['m_account'])){
-  $up_id= $row_Login['m_id'];
-  $up_account= $row_Login['m_account'];
-  $up_username= $row_Login['m_username'];
-  $up_nickname= $row_Login['m_nick'];
-  $up_account= $row_Login['m_account'];
-  $up_level= $row_Login['m_level'];
-}else{
-  $up_username= "";
-  $up_nickname= "";
-  $up_account= "";
-  $up_level= "1";
-}
+<div class="container">
+  <header>
+	 <nav class="primary_header" id="menu">
+      <ul>
+        <a class="h1title">Banking</a>
+        <li><a class="nav-link" href="mainpage.php">首頁</a></li>
+        <li><a class="nav-link" href="goldprice.php">黃金價格</a></li>
+        <li><a class="nav-link" href="stockprice.php">股票價格</a></li>
+        <li><a class="nav-link" href="userdeter.php">會員中心</a></li>
+        <li><a class="nav-link" href="statementsearch.php">收支查詢</a></li>
+		    <li><a class="nav-link" href="logout.php">登出</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+	<div class="top-box"></div>
+	<article class="left_article">
+    <h3 class="toph3"><a class="nav-info" href="useradmincenter.php">個人資料</a></h3>
+    <h3><a class="nav-info" href="editacc.php">變更資料</a></h3>
+    <h3><a class="nav-info" href="editpwd.php">更改密碼</a></h3>
+		<h3><a class="nav-info" href="editaccadmin.php">會員管理</a></h3>
+		<h3><a class="nav-info" href="createacc.php">新增會員</a></h3>
+		<h3><a class="nav-info" href="searchresult.php">查詢會員</a></h3>
+	</article>
+  <?php
+    if(isset( $row_Login['m_account'])){
+      $up_id= $row_Login['m_id'];
+      $up_account= $row_Login['m_account'];
+      $up_username= $row_Login['m_username'];
+      $up_nickname= $row_Login['m_nick'];
+      $up_account= $row_Login['m_account'];
+      $up_level= $row_Login['m_level'];
+    }else{
+      $up_username= "";
+      $up_nickname= "";
+      $up_account= "";
+      $up_level= "1";
+    }
 
-if(isset($_POST['m_username'])){
-  $up_username= $_POST['m_username'];
-  $up_nick= $_POST['m_nick'];
-  $up_level= $_POST['m_level'];
-  $up_account= $_POST['m_account'];
-  $sqlUPdate= "UPDATE memberdata
-        SET m_username= '.$up_username.',
-            m_level= '.$up_level.',
-            m_nick= '.$up_nickname.',
-            m_account= '.$up_account.'
-            WHERE m_account= '.$up_account.'; ";
-  
-  mysqli_select_db($db_link, "phpmember");
-  mysqli_query($db_link,$sqlUPdate);
-  header("location:useradminmanage.php");
-}
-
-?>
-<form action="" method="post" enctype="multipart/form-data">
-<table class="edituser">
-  <tr>
-    <td class="title">帳號</td>
-    <td class="content">
-       <input name="m_username" type="text" value="<?php echo $up_username;?>" />
-    </td>
-      <input name="m_id" type="hidden" value="<?php echo $up_id;?>" />
-    </td>
-  </tr>
-  <tr>
-    <td class="title">暱稱</td> 
-    <td class="content">
-      <input name="m_nick" type="text" value="<?php echo $up_nickname;?>" />
-    </td>
-  </tr>
-  <tr>
-    <td class="title">等級</td>
-    <td class="content">
-      <select name="level" />
-        <option value="0" <?php echo ($up_level==0)?"selected":"";; ?>>無</option>
-        <option value="1" <?php echo ($up_level==1)?"selected":"";; ?>>用戶</option>
-        <option value="2" <?php echo ($up_level==2)?"selected":"";; ?>>管理者</option>
-      </select>
-    </td>
-  </tr>
-  <tr>
-    <td class="title">帳號</td> 
-    <td class="content">
-      <input name="m_account" type="text" value="<?php echo $up_account;?>" />
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" style="text-align:center;">
-      <input name="" type="submit" value="確認修改" />
-    </td>
-    <td>
-      <a href="deleteacc.php">刪除</a>
-    </td>
-  </tr>
-</table>
-</form>
+    if(isset($_POST['username'])){
+      $up_username= $_POST['username'];
+      $up_nick= $_POST['nickname'];
+      $up_level= $_POST['level'];
+      $up_account= $_POST['account'];
+      $sqlUPdate= "UPDATE memberdata
+            SET m_username= '.$up_username.',
+                m_level= '.$up_level.',
+                m_nick= '.$up_nickname.',
+                m_account= '.$up_account.'
+                WHERE m_account= '.$up_account.'; ";
+      
+      mysqli_select_db($db_link, "phpmember");
+      mysqli_query($db_link,$sqlUPdate);
+      header("location:editaccadmin.php");
+    }
+  ?>
+  <aside class="right_article">
+	<form action="" method="get">
+	<div class="search">
+		<h1 class="lbl1">資料編號</h1>
+		<input type="text" name="dataid" class="txt">
+		<input name="submit" type="submit" value="搜索" class= "btn"/>
+	</div>
+	</form>
+	<div class="clearfix"></div>
+  <form action="" method="post" enctype="multipart/form-data">
+	<div class="bg-style1">
+		<h1>更改資料</h1>
+		  <h2 class="lbl2">帳號</h2>
+		  <input type="text" name="username" value="<?php echo $up_username;?>" class="txt2">
+		  <h2 class="lbl2">名稱</h2>
+		  <input type="text" name="nickname" id="nickname" value="<?php echo $up_nickname;?>" class="txt2">
+		  <h2 class="lbl3">等級</h2>
+		  <select name="level" value="<?php echo $up_level;?>" class="select">
+          	<option value="0">無</option>
+          	<option value="1">用戶</option>
+          	<option value="2">管理者</option>
+          </select>
+		  <h2 class="lbl2">銀行帳號</h2>
+		  <input name="account" type="text" value="<?php echo $up_account;?>" class="txt2">
+		  <div class="box"></div>
+		  <input type="submit" value="確認修改" name="submit" class="editbtn">
+		  <a href="deleteacc.php"><input type="" value="刪除" name="" class="editbtn"></a>
+  </div>
+  </form>
+	 <div class="clearfix"></div>
+  	 <div class="content-box"></div>
+    </aside>
+	</section>
+  <footer class="tertiary_header footer">
+    <div class="copyright">Copyright &copy;<strong> Chin-An Liu.</strong> All rights reserved.</div>
+  </footer>
+</div>
 </body>
 </html>
