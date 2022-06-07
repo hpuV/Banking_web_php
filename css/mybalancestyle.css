@@ -17,20 +17,11 @@
 	padding-top: 10px;
 	padding-bottom: 10px;
 	background-color: #f6e04f;
-}
-
-.container .primary_header ul {
-	margin-top: 0%;
-	margin-bottom: 0px;
-	padding-top: 0px;
-	padding-right: 0px;
-	padding-bottom: 5px;
-	padding-left: 0px;
-	width: 100%;
+	
 }
 
 .primary_header .h1title {
-	width: 180px;
+	width: 88%;
 	list-style: none;
 	float: left;
 	margin-top: 0px;
@@ -44,22 +35,65 @@
   	white-space: nowrap;
 }
 
-.primary_header ul li {
-	list-style: none;
-	float: left;
-	margin-right: 0px;
-	margin-top: 15px;
-	text-align: center;
-	transition: all 0.3s linear;
-	font-size: 25px;
-	font-family: "Source Sans Pro";
-	font-weight: normal;
-	color: #231d1f;
-	letter-spacing: 1px;
-	width: 160px;
+
+
+.primary_header ul { /* 取消ul預設的內縮及樣式 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+		
 }
-.primary_header ul li:hover {
-	color: #FFFFFF;
+
+ul.drop-down-menu {
+    /*border: #3C3D3E 1px solid;*/
+    display: inline-block;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 13px;
+	/*text-align: right;*/
+}
+
+.drop-down-menu img{
+	width: 50px;
+	object-fit: fill;
+}
+
+ul.drop-down-menu li {
+    position: relative;
+    white-space: nowrap;
+    border-right: #ccc 1px solid;
+}
+
+ul.drop-down-menu > li:last-child {
+    border-right: none;
+}
+
+ul.drop-down-menu a {
+    background-color: #FFFCEB;
+    color: #333;
+    display: block;
+    padding: 0 30px;
+    text-decoration: none;
+    line-height: 40px;
+	font-size: 20px;
+		
+}
+
+ul.drop-down-menu a:hover { /* 滑鼠滑入按鈕變色*/
+    background-color: #FEE45C;
+    color: #A6A5A4;
+}
+
+ul.drop-down-menu li:hover > a { /* 滑鼠移入次選單上層按鈕保持變色*/
+    background-color: #FEE45C;
+    color: #A6A5A4;
+}
+
+ul.drop-down-menu ul { /*隱藏次選單*/
+    display: none;
+}
+
+ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
+    display: block;
 }
 
 .tertiary_header {

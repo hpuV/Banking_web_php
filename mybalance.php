@@ -29,15 +29,27 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 <body>
 <div class="container">
   <header>
-	 <nav class="primary_header" id="menu">
-      <ul>
-        <a class="h1title">Banking</a>
-        <li><a class="nav-link" href="mainpage.php">首頁</a></li>
-        <li><a class="nav-link" href="goldprice.php">黃金價格</a></li>
-        <li><a class="nav-link" href="stockprice.php">股票價格</a></li>
-        <li><a class="nav-link" href="userdeter.php">會員中心</a></li>
-        <li><a class="nav-link" href="statementsearch.php">收支查詢</a></li>
-		    <li><a class="nav-link" href="logout.php">登出</a></li>
+    <nav class="primary_header" id="menu">
+      <ul class="drop-down-title">
+        <h1 class="h1title">Banking</h1>
+      </ul>
+      <ul class="drop-down-menu">
+          <li><img src="img/menuicon.png">
+          <ul>
+            <li><a href="mainpage.php">首頁</a>
+            </li>
+            <li><a href="goldprice.php">黃金價格</a>
+            </li>
+            <li><a href="stockprice.php">股票價格</a>
+            </li>
+            <li><a href="userdeter.php">會員中心</a>
+            </li>
+            <li><a href="statementsearch.php">收支查詢</a>
+            </li>
+            <li><a href="logout.php">登出</a>
+            </li>
+          </ul>
+        </li>
       </ul>
     </nav>
   </header>
