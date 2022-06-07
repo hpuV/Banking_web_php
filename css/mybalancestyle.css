@@ -79,12 +79,12 @@ ul.drop-down-menu a {
 }
 
 ul.drop-down-menu a:hover { /* 滑鼠滑入按鈕變色*/
-    background-color: #FEE45C;
+    background-color: #FEEA87;
     color: #A6A5A4;
 }
 
 ul.drop-down-menu li:hover > a { /* 滑鼠移入次選單上層按鈕保持變色*/
-    background-color: #FEE45C;
+    background-color: #FEEA87;
     color: #A6A5A4;
 }
 
