@@ -195,13 +195,14 @@ ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
 
 .container .right_article h3{
 	font-size: 20px;
-	color: #888888;
+	color: #7A7A7A;
+	
 }
 
 .container .right_article h4{
 	font-size: 20px;
-	margin-top: 0px;
 	color: #888888;
+	margin-top: 15px;
 }
 
 .container .right_article .content{
@@ -216,6 +217,47 @@ ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
 	margin-left: 10%;
 	height: 25px;
 	width: 60%;
+}
+
+.container .right_article .txt{
+    margin-top: 15px;
+    margin-bottom: 15px;
+	margin-left: 10%;
+    height: 30px;
+    width: 30%;
+    border-radius: 15px;
+    background-color: #E8E8E8;
+	color: #7A7A7A;
+    outline: none;
+	font-size: 15px;
+}
+
+.container .right_article .lbl1 {
+	font-size: 25px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+	margin-left: 10%;
+    color: #7A7A7A;
+}
+
+.container .right_article .btn{
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    margin-left: 10%;
+    border-radius: 10px;
+    font-size: 18px;
+    width: 30%;
+    height: 30px;
+    border-color: transparent;
+    background-color: #FDDD33;
+    color: #7A7A7A;
+    box-shadow: 0px 2px 5px 1px #BBBBBB;
+}
+
+.container .right_article .box{
+	width: 80%;
+	visibility: hidden;
 }
 
 /*leftarticle*/
@@ -290,7 +332,7 @@ body {
  }
 
 .content-box{
-	height: 100px;
+	height: 185px;
 }
 
 .top-box{

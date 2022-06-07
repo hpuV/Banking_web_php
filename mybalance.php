@@ -79,3 +79,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 </div>
 </body>
 </html>
+<?php
+  }else{
+    echo "非法登入!";
+    exit();
+  }
+?>
