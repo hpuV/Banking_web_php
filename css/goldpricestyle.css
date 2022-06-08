@@ -184,7 +184,7 @@
 }
 
 .container .left_article table {
-    border: 10px double #c6a404;
+    border: 10px ridge #c6a404;
     margin-top: 2%;
     background-color: #202125;
     width: 100%;

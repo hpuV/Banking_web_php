@@ -183,7 +183,7 @@
 }
 
 .container .left_article table {
-    border: 10px double #9da0a5;
+    border: 10px ridge #9da0a5;
     margin-top: 5%;
     background-color: #202125;
     width: 100%;
