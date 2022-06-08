@@ -34,145 +34,189 @@ $goldprice = $row_gold['g_price'];
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 ?>
-<DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<title>黃金交易</title>
-<link href="user.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content..="chrome=1">
+<meta name="viewport" content..="width=device-width, initial-scale=1">
+<title>銀行網站</title>
+<link href="css/goldtradestyle.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+</style>
 </head>
 <body>
-<?php
-}else{
-   echo "非法登入!";
-   exit();
-}
-
-if(isset($_POST['g_buygold'])){
-  if(!empty($_POST['g_buygold'])){
-    $in_buygold= $_POST['g_buygold'];
-    
-    $goldnum = $row_acc['m_goldnum'];
-    $in_goldnum = $goldnum + $in_buygold;
-    $trademoney = $goldprice*$in_buygold;
-    $in_balance=  $row_accf['m_balance']-$trademoney;
-
-    date_default_timezone_set('Asia/Taipei');
-    $in_tradetime= date("Y-m-d H:i:s");
-
-    $in_type= "買進黃金";
-    $in_note = "買進".$in_buygold."個黃金";
-
-    mysqli_select_db($db_link, "phpmember");
-
-    //交易紀錄、更新帳戶餘額
-    $sqltradeacc= "INSERT INTO statementdata 
-    VALUE(NULL,'$account','$in_balance','0','$trademoney','$in_tradetime','','$in_type','$in_note');";
-
-    mysqli_query($db_link,$sqltradeacc);
-
-    $sqlUPdateFinance= "UPDATE financedata
-                SET m_balance= '".$in_balance."'
-                WHERE m_account= '".$account."'; ";
-    $sqlUPdateDebit= "UPDATE debitcarddata
-                SET m_balance= '".$in_balance."'
-                WHERE m_account= '".$account."'; ";
-
-    mysqli_query($db_link,$sqlUPdateFinance);
-    mysqli_query($db_link,$sqlUPdateDebit);
-
-    //更新黃金資料
-    $sqlUPdateGoldData= "UPDATE golddata
-                SET m_goldnum= '".$in_goldnum."'
-                WHERE m_gold= '".$goldacc."'; ";
-
-    mysqli_query($db_link,$sqlUPdateGoldData);
-
+<div class="container">
+  <header>
+	 <nav class="primary_header" id="menu">
+      <ul class="drop-down-title">
+		<h1 class="h1title">Banking</h1>
+	  </ul>
+      <ul class="drop-down-menu">
+        <li><img src="img/menuicon.png">
+        	<ul>
+            <li><a href="mainpage.php">首頁</a>
+            </li>
+            <li><a href="goldprice.php">黃金價格</a>
+            </li>
+            <li><a href="stockprice.php">股票價格</a>
+            </li>
+            <li><a href="userdeter.php">會員中心</a>
+            </li>
+            <li><a href="statementsearch.php">收支查詢</a>
+            </li>
+            <li><a href="logout.php">登出</a>
+            </li>
+       		</ul>
+       </li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+	<div class="top-box"></div>
+  <aside class="right_article">
+  <?php
   }else{
-    $in_buygold = "0";
+    echo "非法登入!";
+    exit();
   }
 
-  header("location:mainpage.php");
-}
+  if(isset($_POST['g_buygold'])){
+    if(!empty($_POST['g_buygold'])){
+      $in_buygold= $_POST['g_buygold'];
+      
+      $goldnum = $row_acc['m_goldnum'];
+      $in_goldnum = $goldnum + $in_buygold;
+      $trademoney = $goldprice*$in_buygold;
+      $in_balance=  $row_accf['m_balance']-$trademoney;
 
-if(isset($_POST['g_sellgold'])){
-  if(!empty($_POST['g_sellgold'])){
-    $in_sellgold= $_POST['g_sellgold'];
+      date_default_timezone_set('Asia/Taipei');
+      $in_tradetime= date("Y-m-d H:i:s");
 
-    $goldnum = $row_acc['m_goldnum'];
-    $in_goldnum = $goldnum - $in_sellgold;
-    $trademoney = $goldprice*$in_sellgold;
-    $in_balance=  $row_accf['m_balance']+$trademoney;
+      $in_type= "買進黃金";
+      $in_note = "買進".$in_buygold."個黃金";
 
-    date_default_timezone_set('Asia/Taipei');
-    $in_tradetime= date("Y-m-d H:i:s");
+      mysqli_select_db($db_link, "phpmember");
 
-    $in_type= "賣出黃金";
-    $in_note = "賣出".$in_sellgold."個黃金";
+      //交易紀錄、更新帳戶餘額
+      $sqltradeacc= "INSERT INTO statementdata 
+      VALUE(NULL,'$account','$in_balance','0','$trademoney','$in_tradetime','','$in_type','$in_note');";
 
-    mysqli_select_db($db_link, "phpmember");
+      mysqli_query($db_link,$sqltradeacc);
 
-    //交易紀錄、更新帳戶餘額
-    $sqltradeacc= "INSERT INTO statementdata 
-    VALUE(NULL,'$account','$in_balance','$trademoney','0','$in_tradetime','','$in_type','$in_note');";
+      $sqlUPdateFinance= "UPDATE financedata
+                  SET m_balance= '".$in_balance."'
+                  WHERE m_account= '".$account."'; ";
+      $sqlUPdateDebit= "UPDATE debitcarddata
+                  SET m_balance= '".$in_balance."'
+                  WHERE m_account= '".$account."'; ";
 
-    mysqli_query($db_link,$sqltradeacc);
+      mysqli_query($db_link,$sqlUPdateFinance);
+      mysqli_query($db_link,$sqlUPdateDebit);
 
-    $sqlUPdateFinance= "UPDATE financedata
-                SET m_balance= '".$in_balance."'
-                WHERE m_account= '".$account."'; ";
-    $sqlUPdateDebit= "UPDATE debitcarddata
-                SET m_balance= '".$in_balance."'
-                WHERE m_account= '".$account."'; ";
+      //更新黃金資料
+      $sqlUPdateGoldData= "UPDATE golddata
+                  SET m_goldnum= '".$in_goldnum."'
+                  WHERE m_gold= '".$goldacc."'; ";
 
-    mysqli_query($db_link,$sqlUPdateFinance);
-    mysqli_query($db_link,$sqlUPdateDebit);
+      mysqli_query($db_link,$sqlUPdateGoldData);
 
-    //更新黃金資料
-    $sqlUPdateGoldData= "UPDATE golddata
-                SET m_goldnum= '".$in_goldnum."'
-                WHERE m_gold= '".$goldacc."'; ";
+    }else{
+      $in_buygold = "0";
+    }
 
-    mysqli_query($db_link,$sqlUPdateGoldData);
-  }else{
-    $in_sellgold = "0";
+    header("location:mainpage.php");
   }
 
-  header("location:mainpage.php");
-}
+  if(isset($_POST['g_sellgold'])){
+    if(!empty($_POST['g_sellgold'])){
+      $in_sellgold= $_POST['g_sellgold'];
 
-?>
-<form action="" method="post" enctype="multipart/form-data">
-  <tr>
-    <td class="title">黃金交易帳號: </td>
-    <td class="content"><?php echo $goldacc; ?></td><br/><br/>
-  </tr>
-  <tr>
-    <td class="title">黃金持有數量: </td>
-    <td class="content"><?php echo $row_acc['m_goldnum']; ?></td><br/><br/>
-    </td>
-  </tr>
-  <tr>
-    <td class="title">黃金價格: </td> 
-    <td class="content"><?php echo $goldprice; ?></td><br/><br/>
-    </td>
-  </tr>
-  <tr>
-    <td class="title">購買黃金: </td> 
-    <td class="content">
-      <input name="g_buygold" type="text"/><br/><br/>
-    </td>
-  </tr>
-  <tr>
-    <td class="title">賣出黃金: </td> 
-    <td class="content">
-      <input name="g_sellgold" type="text"/><br/><br/>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <input type="submit" value="提交" />
-    </td>
-  </tr>
-</form>
+      $goldnum = $row_acc['m_goldnum'];
+      $in_goldnum = $goldnum - $in_sellgold;
+      $trademoney = $goldprice*$in_sellgold;
+      $in_balance=  $row_accf['m_balance']+$trademoney;
+
+      date_default_timezone_set('Asia/Taipei');
+      $in_tradetime= date("Y-m-d H:i:s");
+
+      $in_type= "賣出黃金";
+      $in_note = "賣出".$in_sellgold."個黃金";
+
+      mysqli_select_db($db_link, "phpmember");
+
+      //交易紀錄、更新帳戶餘額
+      $sqltradeacc= "INSERT INTO statementdata 
+      VALUE(NULL,'$account','$in_balance','$trademoney','0','$in_tradetime','','$in_type','$in_note');";
+
+      mysqli_query($db_link,$sqltradeacc);
+
+      $sqlUPdateFinance= "UPDATE financedata
+                  SET m_balance= '".$in_balance."'
+                  WHERE m_account= '".$account."'; ";
+      $sqlUPdateDebit= "UPDATE debitcarddata
+                  SET m_balance= '".$in_balance."'
+                  WHERE m_account= '".$account."'; ";
+
+      mysqli_query($db_link,$sqlUPdateFinance);
+      mysqli_query($db_link,$sqlUPdateDebit);
+
+      //更新黃金資料
+      $sqlUPdateGoldData= "UPDATE golddata
+                  SET m_goldnum= '".$in_goldnum."'
+                  WHERE m_gold= '".$goldacc."'; ";
+
+      mysqli_query($db_link,$sqlUPdateGoldData);
+    }else{
+      $in_sellgold = "0";
+    }
+
+    header("location:mainpage.php");
+  }
+
+  ?>
+	<form action="" method="post" enctype="multipart/form-data">
+  <div class="bg-style1">
+		<h2>黃金交易</h2>
+	    <div class="content"><h3>黃金帳戶</h3></div>
+		<div class="value"><h4><?php echo $goldacc; ?></h4></div>
+		<div class="content"><h3>持有數量</h3></div>
+		<div class="value"><h4><?php echo $row_acc['m_goldnum']; ?></h4></div>
+		<div class="content"><h3>黃金價格</h3></div>
+		<div class="value"><h4><?php echo $goldprice; ?></h4></div>
+		<span id="tab-1">1</span>
+		<span id="tab-2">2</span>
+		<span id="tab-3">3</span>
+		<span id="tab-4">4</span>
+		<div id="tab">
+			<!-–頁籤按鈕-–>
+			<ul>
+				<li><a href="#tab-1">買進</a></li>
+				<li><a href="#tab-2">賣出</a></li>
+			</ul>
+			<!-–頁籤的內容區塊-–>
+			<div class="tab-content-1">
+				<p>購買黃金</p>
+				<input type="text" name="g_buygold" class="txt">
+				<div class="box"></div>
+				<input type="submit" value="交易" class= "btn">
+			</div>
+			<div class="tab-content-2">
+				<p>賣出黃金</p>
+				<input type="text" name="g_sellgold" class="txt">
+				<div class="box"></div>
+				<input type="submit" value="交易" class= "btn">
+			</div>
+		</div>
+  </div>
+  </form>
+	<div class="clearfix"></div>
+  	 <div class="content-box"></div>
+    </aside>
+	</section>
+  <footer class="tertiary_header footer">
+    <div class="copyright">Copyright &copy;<strong> Chin-An Liu.</strong> All rights reserved.</div>
+  </footer>
+</div>
 </body>
 </html>

@@ -36,18 +36,18 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
       <ul class="drop-down-menu">
         <li><img src="img/menuicon.png">
         	<ul>
-            	<li><a href="#">首頁</a>
-                </li>
-                <li><a href="#">黃金價格</a>
-                </li>
-                <li><a href="#">股票價格</a>
-				</li>
-				<li><a href="#">會員中心</a>
-				</li>
-				<li><a href="#">收支查詢</a>
-				</li>
-				<li><a href="#">登出</a>
-				</li>
+            <li><a href="mainpage.php">首頁</a>
+            </li>
+            <li><a href="goldprice.php">黃金價格</a>
+            </li>
+            <li><a href="stockprice.php">股票價格</a>
+            </li>
+            <li><a href="userdeter.php">會員中心</a>
+            </li>
+            <li><a href="statementsearch.php">收支查詢</a>
+            </li>
+            <li><a href="logout.php">登出</a>
+            </li>
        		</ul>
        </li>
       </ul>
