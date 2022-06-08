@@ -15,37 +15,71 @@ $row_acc = mysqli_fetch_assoc($resultacc);
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 ?>
-<DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<title>黃金存摺</title>
-<link href="user.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content..="width=device-width, initial-scale=1">
+<title>銀行網站</title>
+<link href="css/goldcenterstyle.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+</style>
 </head>
 <body>
-<table>
-  <tr>
-    <td class="title">暱稱: </td>
-    <td class="content"><?php echo $nick; ?></td>
-  </tr>
-  <tr>
-    <td class="title">黃金交易帳號: </td>
-    <td class="content"><?php echo $goldacc; ?></td>
-    </td>
-  </tr>
-  <tr>
-    <td class="title">黃金數量: </td>
-    <td class="content"><?php echo $row_acc['m_goldnum']; ?></td>
-    </td>
-  </tr>
-  <tr>
-  <td><a href="goldtrade.php?"><input type="button" value="買/賣黃金" style = "width:100px; height:30px; font-size: 15px;"></a></td>
-  </tr>
-</table>
+<div class="container">
+  <header>
+	 <nav class="primary_header" id="menu">
+      <ul class="drop-down-title">
+		<h1 class="h1title">Banking</h1>
+	  </ul>
+      <ul class="drop-down-menu">
+        <li><img src="img/menuicon.png">
+        	<ul>
+            	<li><a href="#">首頁</a>
+                </li>
+                <li><a href="#">黃金價格</a>
+                </li>
+                <li><a href="#">股票價格</a>
+				</li>
+				<li><a href="#">會員中心</a>
+				</li>
+				<li><a href="#">收支查詢</a>
+				</li>
+				<li><a href="#">登出</a>
+				</li>
+       		</ul>
+       </li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+	<div class="top-box"></div>
+    <aside class="right_article">
+	<div class="bg-style1">
+		<h2>黃金存摺</h2>
+	    <div class="content"><h3>暱稱</h3></div>
+		<div class="value"><h4><?php echo $nick; ?></h4></div>
+	    <div class="content"><h3>黃金帳戶</h3></div>
+		<div class="value"><h4><?php echo $goldacc; ?></h4></div>
+		<div class="content"><h3>持有數量</h3></div>
+		<div class="value"><h4><?php echo $row_acc['m_goldnum']; ?></h4></div>
+		<div class="box"></div>
+		<a href="goldtrade.php?"><input type="button" value="黃金交易" class= "btn"></a>
+     </div>
+	 <div class="clearfix"></div>
+  	 <div class="content-box"></div>
+    </aside>
+	</section>
+  <footer class="tertiary_header footer">
+    <div class="copyright">Copyright &copy;<strong> Chin-An Liu.</strong> All rights reserved.</div>
+  </footer>
+</div>
+</body>
+</html>
 <?php
 }else{
   echo "非法登入!";
   exit();
  }
 ?>
-</body>
-</html>
