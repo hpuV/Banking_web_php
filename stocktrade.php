@@ -9,6 +9,7 @@ $account = $_SESSION["account"];
 $goldacc = $_SESSION["goldacc"];
 $stockacc = $_SESSION["stockacc"];
 $_SESSION['stockbuynum'] = "1";
+$_SESSION['stocksellnum'] = "1";
 
 //帳號資料
 $sqlaccf = "SELECT * FROM financedata WHERE m_account = '".$account."' ";
@@ -17,46 +18,16 @@ $row_accf = mysqli_fetch_assoc($resultaccf);
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 ?>
-<DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<title>證券交易</title>
-<link href="user.css" rel="stylesheet" type="text/css">
-<script type="text/javascript">
-  function changebuy(){
-    var dis = document.getElementById('divtrade');
-
-    dis.className = dis.className + " redstyle";  // this adds the class
-    dis.className = dis.className.replace(" greenstyle", ""); // this removes the class
-
-  }
-  function changesell(){
-    var dis = document.getElementById('divtrade');
-
-    dis.className = dis.className + " greenstyle";  // this adds the class
-    dis.className = dis.className.replace(" redstyle", ""); // this removes the class
-
-  }
-  function Hidediv(){
-    var dis = document.getElementById('divtrade');
-
-    if(dis.style.display == ''){
-      dis.style.display = 'none';
-    }else{
-      dis.style.display = 'none';
-    }
-  }
-  function Showdiv(){
-    var dis = document.getElementById('divtrade');
-
-    if(dis.style.display == ''){
-      dis.style.display = '';
-    }else{
-      dis.style.display = '';
-    }
-  }
-  
-</script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content..="chrome=1">
+<meta name="viewport" content..="width=device-width, initial-scale=1">
+<title>銀行網站</title>
+<link href="css/stocktradestyle.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+</style>
 </head>
 <body>
 <?php
@@ -111,21 +82,11 @@ if (isset($_GET['searchid'])) {
     //echo "Data Inserted";
   }
 
-  /*
-  echo "<script language=\"JavaScript\">"; 
-  echo "Showdiv()";
-  echo "</script>";*/
-
   }else{
 
     $companyid = "";
     $stockprice = "0";
     $companyname = "查無資料";
-
-    /*
-    echo "<script language=\"JavaScript\">"; 
-    echo "Hidediv()";
-    echo "</script>";*/
     
   }
 }
@@ -136,65 +97,85 @@ $resultaccs = mysqli_query($db_link,$sqlaccs);
 $row_accs = mysqli_fetch_assoc($resultaccs);
 
 //增加/減少購買數量
-if (isset($_POST['del'])) {
-  $_SESSION["stockbuynum"] = $_POST["numPost"]-1;
+if (isset($_POST['delbuy'])) {
+  $_SESSION["stockbuynum"] = $_POST["numPostB"]-1;
   if($_SESSION["stockbuynum"] < 1){
     $_SESSION["stockbuynum"] = 1;
   }
 }
 
-if(isset($_POST['add'])){
-  $_SESSION["stockbuynum"] = $_POST["numPost"]+1;
+if(isset($_POST['addbuy'])){
+  $_SESSION["stockbuynum"] = $_POST["numPostB"]+1;
+}
+
+if (isset($_POST['delsell'])) {
+  $_SESSION["stocksellnum"] = $_POST["numPostS"]-1;
+  if($_SESSION["stocksellnum"] < 1){
+    $_SESSION["stocksellnum"] = 1;
+  }
+}
+
+if(isset($_POST['addsell'])){
+  $_SESSION["stocksellnum"] = $_POST["numPostS"]+1;
 }
 
 mysqli_select_db($db_link, "phpmember");
   //echo $_POST['onoffswitch'];
   //更新股票買進資料
-if(isset($_POST['submittrade'])){
-  if(isset($_POST['change'])){
-    $decision = $_POST['change'];
+if(isset($_POST['submittradebuy'])){
+    if(!empty($companyid)){
+      $in_buy= $_POST["numPostB"];
+      $stocknum = $row_accs['p_stocknum'];
+      $trademoney = $stockprice*$in_buy;
 
-    $in_buy= $_POST["numPost"];
-    $stocknum = $row_accs['p_stocknum'];
-    $trademoney = $stockprice*$in_buy;
+      date_default_timezone_set('Asia/Taipei');
+      $in_tradetime= date("Y-m-d H:i:s");
 
-    date_default_timezone_set('Asia/Taipei');
-    $in_tradetime= date("Y-m-d H:i:s");
+        $in_stocknum = $stocknum + $in_buy;
+        $in_balance=  $row_accf['m_balance']-$trademoney;
 
-      if($decision == "buy"){
-      $in_stocknum = $stocknum + $in_buy;
-      $in_balance=  $row_accf['m_balance']-$trademoney;
+        $in_type= "買進股票";
+        $in_note = "買進".$companyname."股票".$in_buy."張";
 
-      $in_type= "買進股票";
-      $in_note = "買進".$companyname."股票".$in_buy."張";
+        //更新帳戶餘額
+        $sqlUPdateFinance= "UPDATE financedata
+                    SET m_balance= '".$in_balance."'
+                    WHERE m_account= '".$account."'; ";
+        $sqlUPdateDebit= "UPDATE debitcarddata
+                    SET m_balance= '".$in_balance."'
+                    WHERE m_account= '".$account."'; ";
 
-      //更新帳戶餘額
-      $sqlUPdateFinance= "UPDATE financedata
-                  SET m_balance= '".$in_balance."'
-                  WHERE m_account= '".$account."'; ";
-      $sqlUPdateDebit= "UPDATE debitcarddata
-                  SET m_balance= '".$in_balance."'
-                  WHERE m_account= '".$account."'; ";
+        mysqli_query($db_link,$sqlUPdateFinance);
+        mysqli_query($db_link,$sqlUPdateDebit);
 
-      mysqli_query($db_link,$sqlUPdateFinance);
-      mysqli_query($db_link,$sqlUPdateDebit);
+        //交易紀錄
+        $sqltradeacc= "INSERT INTO statementdata 
+        VALUE('','$account','$in_balance','0','$trademoney','$in_tradetime','','$in_type','$in_note');";
 
-      //交易紀錄
-      $sqltradeacc= "INSERT INTO statementdata 
-      VALUE('','$account','$in_balance','0','$trademoney','$in_tradetime','','$in_type','$in_note');";
+        mysqli_query($db_link,$sqltradeacc);
 
-      mysqli_query($db_link,$sqltradeacc);
+        //更新股票資料
+        $sqlUPdateStockData= "UPDATE personalstockdata
+                    SET p_stocknum = '".$in_stocknum."'
+                    WHERE m_stock= '".$stockacc."' AND s_companyid= '".$companyid."';";
 
-      //更新股票資料
-      $sqlUPdateStockData= "UPDATE personalstockdata
-                  SET p_stocknum = '".$in_stocknum."'
-                  WHERE m_stock= '".$stockacc."' AND s_companyid= '".$companyid."';";
+        mysqli_query($db_link,$sqlUPdateStockData);
 
-      mysqli_query($db_link,$sqlUPdateStockData);
+        function_alert($in_note);
+    }else{
+      function_alert("商品編號不能空白");
+    }
+}
 
-      function_alert($in_note);
-    
-    }else if($decision == "sell"){
+if(isset($_POST['submittradesell'])){
+  if(!empty($companyid)){
+      $in_buy= $_POST["numPostS"];
+      $stocknum = $row_accs['p_stocknum'];
+      $trademoney = $stockprice*$in_buy;
+
+      date_default_timezone_set('Asia/Taipei');
+      $in_tradetime= date("Y-m-d H:i:s");
+      
       $in_stocknum = $stocknum - $in_buy;
       //echo $in_stocknum;
       $in_balance=  $row_accf['m_balance']+$trademoney;
@@ -227,9 +208,9 @@ if(isset($_POST['submittrade'])){
       mysqli_query($db_link,$sqlUPdateStockData);
 
       function_alert($in_note);
-    
+    }else{
+      function_alert("商品編號不能空白");
     }
-  }
 }
 
 function function_alert($message) {
@@ -239,57 +220,87 @@ function function_alert($message) {
 }
 
 ?>
-<form action="" method="get">
-  <tr>
-    <td class="title">持股編號: </td>
-    <td class="content"><?php echo $stockacc; ?></td><br/><br/>
-  </tr>
-  <tr>
-    <td class="title">商品: </td>
-    <td class="content">
-      <input name="searchid" type="text"  placeholder="請輸入商品編號" value="<?php echo $companyid;?>"/>
-       <?php echo $companyname;?></br>
-       <input type="submit" value="搜尋" id="search"/>
-    </td>
-  </tr>
-</form>
-<form action="" method="post">
-<div>
-    <td class="title">買賣: </td> 
+<div class="container">
+  <header>
+	 <nav class="primary_header" id="menu">
+      <ul class="drop-down-title">
+        <h1 class="h1title">Banking</h1>
+      </ul>
+      <ul class="drop-down-menu">
+        <li><img src="img/menuicon.png">
+          <ul>
+            <li><a href="mainpage.php">首頁</a>
+            </li>
+            <li><a href="goldprice.php">黃金價格</a>
+            </li>
+            <li><a href="stockprice.php">股票價格</a>
+            </li>
+            <li><a href="userdeter.php">會員中心</a>
+            </li>
+            <li><a href="statementsearch.php">收支查詢</a>
+            </li>
+            <li><a href="logout.php">登出</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+	<div class="top-box"></div>
+    <aside class="right_article">
+	<div class="bg-style1">
+    <form action="" method="get">
+		<h2>證券交易</h2>
+	    <div class="content"><h3>持股編號</h3></div>
+		<div class="value"><h4>stockacc</h4></div>
+		<div class="content"><h3>商品</h3></div>
+		<div class="value"><h4><?php echo $companyname;?></h4></div>
+		<input name="searchid" type="text"  placeholder="請輸入商品編號" value="<?php echo $companyid;?>" class="searchtxt">
+    <input type="submit" value="搜尋" id="search" class="searchbtn">
+    </form>
+    <form action="" method="post">
+		<span id="tab-1">1</span>
+		<span id="tab-2">2</span>
+		<span id="tab-3">3</span>
+		<span id="tab-4">4</span>
+		<div id="tab">
+			<!-–頁籤按鈕-->
+			<ul>
+				<li><a href="#tab-1" class="buyp">買進</a></li>
+				<li><a href="#tab-2" class="sellp">賣出</a></li>
+			</ul>
+			<!-–頁籤的內容區塊-->
+			<div class="tab-content-1">
+				<p class="buyp">買進股票</p>
+				<input type="submit" name="delbuy" value="-" class= "numbtn add">
+				<input type="text" name="numPostB" value="<?php echo $_SESSION["stockbuynum"]?>" class="txt">
+				<input type="submit" name="addbuy" value="+" class= "numbtn">
+				<p class="contentp buyp">1單位1000股</p>
+				<p class="contentp buyp">價格: <?php echo $stockprice;?></p>
+				<div class="box"></div>
+				<input type="submit" value="下單" name="submittradebuy" class= "btn">
+			</div>
+			<div class="tab-content-2">
+				<p class="sellp">買出股票</p>
+				<input type="submit" name="delsell" value="-" class= "numbtn add">
+				<input type="text" name="numPostS" value="<?php echo $_SESSION["stocksellnum"]?>" class="txt">
+				<input type="submit" name="addsell" value="+" class= "numbtn">
+				<p class="contentp sellp">1單位1000股</p>
+				<p class="contentp sellp">價格: <?php echo $stockprice;?></p>
+				<div class="box"></div>
+				<input type="submit" value="下單" name="submittradesell" class= "btn">
+			</div>
+		</div>
+    </form>
+  </div>
+	<div class="clearfix"></div>
+  	 <div class="content-box"></div>
+    </aside>
+	</section>
+  <footer class="tertiary_header footer">
+    <div class="copyright">Copyright &copy;<strong> Chin-An Liu.</strong> All rights reserved.</div>
+  </footer>
 </div>
-<fieldset>
-    <div>
-      <input class="radionin" type="radio" id="buy" value="buy" name="change"
-             checked>
-      <label class="raionlbl" for="buy">買進</label>
-    </div>
-    <div>
-      <input class="radionin" type="radio" id="sell" value="sell" name="change">
-      <label class="raionlbl" for="sell">賣出</label>
-    </div>
-</fieldset>
-<div id="divtrade">
-    <input type="submit" name="del" value="-" id="del"/>
-    <input type="text" name="numPost" value="<?php echo $_SESSION["stockbuynum"]?>" />
-    <input type="submit" name="add" value="+" id="add"/>
-    <p>價格: <?php echo $stockprice;?></p>
-    <input type="submit" value="下單" name="submittrade" id="submittrade"/>
-</div>
-</form>
-<style>
-    .greenstyle {
-        border:2px green solid;
-    }
-    .redstyle {
-        border:2px red solid;
-    }
-    p,label .radiolbl{
-        
-    }
-
-    input .radionin{
-
-    }
-</style>
 </body>
 </html>

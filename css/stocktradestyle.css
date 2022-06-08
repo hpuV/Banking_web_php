@@ -170,7 +170,7 @@ ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
 }
 
 .right_article {
-	background-color: #e9ecef;;
+	background-color: #e9ecef;
 	width: 95%;
 	font-family: "Source Sans Pro";
 	color: #343434;
@@ -188,20 +188,20 @@ ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
 
 .container .right_article h2 {
 	font-size: 30px;
-    color: #c1870c;
+    color: #181818;
     font-weight: bold;
 	margin-bottom: 0px;
 }
 
 .container .right_article h3{
 	font-size: 25px;
-	color: #DAA520;
+	color: #383838;
 	
 }
 
 .container .right_article h4{
 	font-size: 20px;
-	color: #c9b44b;
+	color: #383838;
 	margin-top: 15px;
 }
 
@@ -219,26 +219,67 @@ ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
 	width: 60%;
 }
 
-.container .right_article .txt{
+.container .right_article .searchtxt{
     margin-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
 	margin-left: 10%;
     height: 30px;
-    width: 60%;
+    width: 20%;
     border-radius: 15px;
-    background-color: #E6BE8A;
+    background-color: #707477;
 	border: transparent;
-	color: #7A7A7A;
+	color: #f8f9fb;
     outline: none;
 	font-size: 15px;
 }
 
-.container .right_article .lbl1 {
-	font-size: 25px;
-    margin-top: 15px;
+.container .right_article .searchbtn{
+    text-align: center;
+    margin-top: 10px;
     margin-bottom: 0px;
-	margin-left: 10%;
-    color: #7A7A7A;
+    margin-left: 10px;
+    border-radius: 10px;
+    font-size: 18px;
+    width: 10%;
+    height: 30px;
+    border-color: transparent;
+    background-color: #707477;
+    color: #f8f9fb;
+    box-shadow: 0px 2px 5px 1px #BBBBBB;
+}
+
+.container .right_article .numbtn{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: 0%;
+	margin-right: 0%;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    border-color: transparent;
+    background-color: #cdcdcd;
+    color: #252525;
+}
+
+.container .right_article .add{
+    margin-left: 10%;
+}
+
+.container .right_article .txt{
+    margin-top: 5px;
+    margin-bottom: 15px;
+	margin-left: 0%;
+    height: 30px;
+    width: 20%;
+    border-radius: 5px;
+    background-color: #717578;
+	border: transparent;
+	color: #cdcdcd;
+    outline: none;
+	font-size: 15px;
+	text-align: center;
 }
 
 .container .right_article .btn{
@@ -248,18 +289,30 @@ ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
     margin-left: 10%;
     border-radius: 10px;
     font-size: 18px;
-    width: 60%;
+    width: 40%;
     height: 30px;
     border-color: transparent;
-    background-color: #E6BE8A;
-    color: #996515;
-    box-shadow: 0px 2px 5px 1px #BBBBBB;
+    background-color: #f8c200;
+	font-weight: bold;
+    color: #fdfdfd;
 }
 
 .container .right_article p {
 	margin-top: 20px;
-	color: #996515;
+}
+
+.container .right_article .buyp {
 	font-size: 18px;
+	color: #FF0000;
+}
+
+.container .right_article .sellp {
+	color: #76ff4f;
+}
+
+.container .right_article .contentp {
+	margin-top: 5px;
+	margin-left: 10%;
 }
 
 .container .right_article .box{
@@ -341,7 +394,7 @@ body {
  }
 
 .content-box{
-	height: 185px;
+	height: 250px;
 }
 
 .top-box{
@@ -350,11 +403,11 @@ body {
 
 #tab{
 width: 40%;
-background: #D4AF37;
-border: solid 1px #C5B358;
+background: #717578;
+border: solid 1px #111111;
 border-radius: 1em;
 margin-left: 10%;
-margin-top: 35px;
+margin-top: 30px;
 }
 /* 頁籤ul */
 #tab>ul{
@@ -368,7 +421,6 @@ list-style-type: none;
 #tab>ul>li>a{
 text-decoration: none;
 font-size: 18px;
-color: #996515;
 float: left;
 padding: 10px;
 margin-left: 5px;
@@ -397,12 +449,12 @@ border-bottom-right-radius: 1em;
 #tab-2:target,
 #tab-3:target,
 #tab-4:target{
-border: solid 1px #faedc3;
+border: solid 1px #111111;
 }
 
 /*第一筆的底色*/
 span:target ~ #tab > ul li:first-child a {
-background:#D4AF37;
+background:#717578;
 }
 span:target ~ #tab > div:first-of-type {
 visibility:hidden;
@@ -416,7 +468,7 @@ span ~ #tab > ul li:first-child a,
 #tab-2:target ~ #tab > ul li a[href$="#tab-2"],
 #tab-3:target ~ #tab > ul li a[href$="#tab-3"],
 #tab-4:target ~ #tab > ul li a[href$="#tab-4"] {
-background: #faedc3;
+background: #2d3134;
 }
 
 /*頁籤內容顯示&第一筆*/
@@ -426,10 +478,19 @@ span ~ #tab > div:first-of-type,
 #tab-3:target ~ #tab > div.tab-content-3,
 #tab-4:target ~ #tab > div.tab-content-4 {
 visibility:visible;
-height:200px;
-background: #faedc3;
+height:280px;
+background: #2d3134;
 }
 
 span {
 	display: none;
 }
+
+/*webkit瀏覽器專用*/
+.container ::-webkit-input-placeholder { color: #f8f9fb; }
+/*Firefox 4-18瀏覽器專用*/
+.container input::-moz-placeholder { color: #f8f9fb; }
+/*Firefox 19+瀏覽器專用*/
+.container input::-moz-placeholder{color: #f8f9fb; }
+/*IE10瀏覽器專用*/
+.container:-ms-input-placeholder{color: #f8f9fb; }
