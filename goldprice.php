@@ -33,7 +33,7 @@ $updatetime = $row_gold['g_date'];
         <li><a class="nav-link" href="stockprice.php">股票價格</a></li>
         <li><a class="nav-link" href="userdeter.php">會員中心</a></li>
         <li><a class="nav-link" href="statementsearch.php">收支查詢</a></li>
-		    <li><a class="nav-link" href="logout.php">登出</a></li>
+		<li><a class="nav-link" href="logout.php">登出</a></li>
       </ul>
     </nav>
   </header>
