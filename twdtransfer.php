@@ -11,6 +11,8 @@ $resultout = mysqli_query($db_link,$sqlout);
 $row_accout = mysqli_fetch_assoc($resultout);
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+  $balance = $row_accout["m_balance"];
+  $balance = number_format($balance);
 ?>
 <!doctype html>
 <html>
@@ -62,62 +64,71 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
   }
 
   if(isset($_POST['accin'])){
-    //更新資料
-    $in_accin= $_POST['accin'];
-    $in_amount= $_POST['amountin'];
-    $in_note= $_POST['notein'];
-    $in_type= "臺幣轉帳";
-    $in_balanceOutacc= $row_accout['m_balance']-$in_amount;
+    if($row_accout['m_balance'] <= 0){
+      function_alert("餘額不足無法交易");
+    }else{
+      //更新資料
+      $in_accin= $_POST['accin'];
+      $in_amount= $_POST['amountin'];
+      $in_note= $_POST['notein'];
+      $in_type= "臺幣轉帳";
+      $in_balanceOutacc= $row_accout['m_balance']-$in_amount;
 
-    date_default_timezone_set('Asia/Taipei');
-    $in_tradetime= date("Y-m-d H:i:s");
+      date_default_timezone_set('Asia/Taipei');
+      $in_tradetime= date("Y-m-d H:i:s");
 
-    //session 資料
-    $_SESSION["amounttwd"] = $in_amount;
+      //session 資料
+      $_SESSION["amounttwd"] = $in_amount;
 
-    //轉入帳號資料
-    $account = $_SESSION["account"];
-    $sqlin = "SELECT * FROM financedata WHERE m_account = '".$in_accin."' ";
-    $resultin = mysqli_query($db_link,$sqlin);
-    $row_accin = mysqli_fetch_assoc($resultin);
-    $in_balanceInacc= $row_accin['m_balance']+$in_amount;
+      //轉入帳號資料
+      $account = $_SESSION["account"];
+      $sqlin = "SELECT * FROM financedata WHERE m_account = '".$in_accin."' ";
+      $resultin = mysqli_query($db_link,$sqlin);
+      $row_accin = mysqli_fetch_assoc($resultin);
+      $in_balanceInacc= $row_accin['m_balance']+$in_amount;
 
-    mysqli_select_db($db_link, "phpmember");
-    //轉出帳號(這個登入者)
-    //編號 帳號出 餘額 收入 支出 時間 帳號入 註記
-    $sqlOutacc= "INSERT INTO statementdata 
-    VALUE(NULL,'$account','$in_balanceOutacc','0','$in_amount','$in_tradetime','$in_accin','$in_type','$in_note');";
-    
-    //轉入帳號
-    //編號 帳號入 餘額 收入 支出 時間 帳號出 註記
-    $sqlInacc= "INSERT INTO statementdata 
-    VALUE(NULL,'$in_accin','$in_balanceInacc','$in_amount','0','$in_tradetime','$account','$in_type','$in_note');";
+      mysqli_select_db($db_link, "phpmember");
+      //轉出帳號(這個登入者)
+      //編號 帳號出 餘額 收入 支出 時間 帳號入 註記
+      $sqlOutacc= "INSERT INTO statementdata 
+      VALUE(NULL,'$account','$in_balanceOutacc','0','$in_amount','$in_tradetime','$in_accin','$in_type','$in_note');";
+      
+      //轉入帳號
+      //編號 帳號入 餘額 收入 支出 時間 帳號出 註記
+      $sqlInacc= "INSERT INTO statementdata 
+      VALUE(NULL,'$in_accin','$in_balanceInacc','$in_amount','0','$in_tradetime','$account','$in_type','$in_note');";
 
-    mysqli_query($db_link,$sqlOutacc);
-    mysqli_query($db_link,$sqlInacc);
+      mysqli_query($db_link,$sqlOutacc);
+      mysqli_query($db_link,$sqlInacc);
 
-    //更新資料financedata, debitcarddata - 轉出帳號(這個登入者)
-    $sqlUPdateFinanceOut= "UPDATE financedata
-                SET m_balance= '".$in_balanceOutacc."'
-                WHERE m_account= '".$account."'; ";
-    $sqlUPdateDebitOut= "UPDATE debitcarddata
-                SET m_balance= '".$in_balanceOutacc."'
-                WHERE m_account= '".$account."'; ";
+      //更新資料financedata, debitcarddata - 轉出帳號(這個登入者)
+      $sqlUPdateFinanceOut= "UPDATE financedata
+                  SET m_balance= '".$in_balanceOutacc."'
+                  WHERE m_account= '".$account."'; ";
+      $sqlUPdateDebitOut= "UPDATE debitcarddata
+                  SET m_balance= '".$in_balanceOutacc."'
+                  WHERE m_account= '".$account."'; ";
 
-    mysqli_query($db_link,$sqlUPdateFinanceOut);
-    mysqli_query($db_link,$sqlUPdateDebitOut);
-    
-    //更新資料financedata, debitcarddata - 轉入帳號
-    $sqlUPdateFinanceIn= "UPDATE financedata
-                SET m_balance= '".$in_balanceInacc."'
-                WHERE m_account= '".$in_accin."'; ";
-    $sqlUPdateDebitIn= "UPDATE debitcarddata
-                SET m_balance= '".$in_balanceInacc."'
-                WHERE m_account= '".$in_accin."'; ";
+      mysqli_query($db_link,$sqlUPdateFinanceOut);
+      mysqli_query($db_link,$sqlUPdateDebitOut);
+      
+      //更新資料financedata, debitcarddata - 轉入帳號
+      $sqlUPdateFinanceIn= "UPDATE financedata
+                  SET m_balance= '".$in_balanceInacc."'
+                  WHERE m_account= '".$in_accin."'; ";
+      $sqlUPdateDebitIn= "UPDATE debitcarddata
+                  SET m_balance= '".$in_balanceInacc."'
+                  WHERE m_account= '".$in_accin."'; ";
 
-    mysqli_query($db_link,$sqlUPdateFinanceIn);
-    mysqli_query($db_link,$sqlUPdateDebitIn);
-    header("location:tradetwdnext.php");
+      mysqli_query($db_link,$sqlUPdateFinanceIn);
+      mysqli_query($db_link,$sqlUPdateDebitIn);
+      header("location:tradetwdnext.php");
+    }
+  }
+
+  function function_alert($message) {
+    echo "<script>alert('$message');</script>"; 
+    return false;
   }
 
   ?>
@@ -125,9 +136,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
   <div class="bg-style1">
 		<h2>臺幣轉帳</h2>
 	    <div class="content"><h3>轉出帳號</h3></div>
-		<div class="value"><h4>m_account</h4></div>
+		<div class="value"><h4><?php echo $row_accout['m_account']; ?></h4></div>
 	    <div class="content"><h3>可用餘額</h3></div>
-		<div class="value"><h4>m_balance</h4></div>
+		<div class="value"><h4><?php echo $balance; ?></h4></div>
 		<hr>
 		<h3 class="lbl1">轉入帳號</h3>
 		<input type="text" name="accin" placeholder="銀行代碼/帳號" class="txt">

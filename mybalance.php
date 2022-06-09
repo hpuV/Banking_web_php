@@ -13,7 +13,8 @@ $result = mysqli_query($db_link,$sql);
 $row_Login = mysqli_fetch_assoc($result);
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-
+  $balance = $row_Login["m_balance"];
+  $balance = number_format($balance);
 ?>
 <!doctype html>
 <html>
@@ -67,7 +68,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 		<h2>我的臺幣</h2>
 		<div class="value"><h3><?php echo $account; ?></h3></div>
 	    <div class="content"><h4>銀行帳戶</h4></div>
-		<div class="value"><h3><?php echo $row_Login["m_balance"]; ?></h3></div>
+		<div class="value"><h3><?php echo $balance; ?></h3></div>
 	    <div class="content"><h4>臺幣帳戶餘額</h4></div>
 		<hr>
      </div>

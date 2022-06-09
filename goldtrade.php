@@ -84,96 +84,104 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
   }
 
   if(isset($_POST['g_buygold'])){
-    if(!empty($_POST['g_buygold'])){
-      $in_buygold= $_POST['g_buygold'];
-      
-      $goldnum = $row_acc['m_goldnum'];
-      $in_goldnum = $goldnum + $in_buygold;
-      $trademoney = $goldprice*$in_buygold;
-      $in_balance=  $row_accf['m_balance']-$trademoney;
-
-      date_default_timezone_set('Asia/Taipei');
-      $in_tradetime= date("Y-m-d H:i:s");
-
-      $in_type= "買進黃金";
-      $in_note = "買進".$in_buygold."個黃金";
-
-      mysqli_select_db($db_link, "phpmember");
-
-      //交易紀錄、更新帳戶餘額
-      $sqltradeacc= "INSERT INTO statementdata 
-      VALUE(NULL,'$account','$in_balance','0','$trademoney','$in_tradetime','','$in_type','$in_note');";
-
-      mysqli_query($db_link,$sqltradeacc);
-
-      $sqlUPdateFinance= "UPDATE financedata
-                  SET m_balance= '".$in_balance."'
-                  WHERE m_account= '".$account."'; ";
-      $sqlUPdateDebit= "UPDATE debitcarddata
-                  SET m_balance= '".$in_balance."'
-                  WHERE m_account= '".$account."'; ";
-
-      mysqli_query($db_link,$sqlUPdateFinance);
-      mysqli_query($db_link,$sqlUPdateDebit);
-
-      //更新黃金資料
-      $sqlUPdateGoldData= "UPDATE golddata
-                  SET m_goldnum= '".$in_goldnum."'
-                  WHERE m_gold= '".$goldacc."'; ";
-
-      mysqli_query($db_link,$sqlUPdateGoldData);
-
+    if($row_accout['m_balance'] <= 0){
+      function_alert("餘額不足無法交易");
     }else{
-      $in_buygold = "0";
-    }
+      if(!empty($_POST['g_buygold'])){
+        $in_buygold= $_POST['g_buygold'];
+        
+        $goldnum = $row_acc['m_goldnum'];
+        $in_goldnum = $goldnum + $in_buygold;
+        $trademoney = $goldprice*$in_buygold;
+        $in_balance=  $row_accf['m_balance']-$trademoney;
 
-    header("location:tradegoldnext.php");
+        date_default_timezone_set('Asia/Taipei');
+        $in_tradetime= date("Y-m-d H:i:s");
+
+        $in_type= "買進黃金";
+        $in_note = "買進".$in_buygold."個黃金";
+
+        mysqli_select_db($db_link, "phpmember");
+
+        //交易紀錄、更新帳戶餘額
+        $sqltradeacc= "INSERT INTO statementdata 
+        VALUE(NULL,'$account','$in_balance','0','$trademoney','$in_tradetime','','$in_type','$in_note');";
+
+        mysqli_query($db_link,$sqltradeacc);
+
+        $sqlUPdateFinance= "UPDATE financedata
+                    SET m_balance= '".$in_balance."'
+                    WHERE m_account= '".$account."'; ";
+        $sqlUPdateDebit= "UPDATE debitcarddata
+                    SET m_balance= '".$in_balance."'
+                    WHERE m_account= '".$account."'; ";
+
+        mysqli_query($db_link,$sqlUPdateFinance);
+        mysqli_query($db_link,$sqlUPdateDebit);
+
+        //更新黃金資料
+        $sqlUPdateGoldData= "UPDATE golddata
+                    SET m_goldnum= '".$in_goldnum."'
+                    WHERE m_gold= '".$goldacc."'; ";
+
+        mysqli_query($db_link,$sqlUPdateGoldData);
+
+      }else{
+        $in_buygold = "0";
+      }
+
+      header("location:tradegoldnext.php");
+    }
   }
 
   if(isset($_POST['g_sellgold'])){
-    if(!empty($_POST['g_sellgold'])){
-      $in_sellgold= $_POST['g_sellgold'];
-
-      $goldnum = $row_acc['m_goldnum'];
-      $in_goldnum = $goldnum - $in_sellgold;
-      $trademoney = $goldprice*$in_sellgold;
-      $in_balance=  $row_accf['m_balance']+$trademoney;
-
-      date_default_timezone_set('Asia/Taipei');
-      $in_tradetime= date("Y-m-d H:i:s");
-
-      $in_type= "賣出黃金";
-      $in_note = "賣出".$in_sellgold."個黃金";
-
-      mysqli_select_db($db_link, "phpmember");
-
-      //交易紀錄、更新帳戶餘額
-      $sqltradeacc= "INSERT INTO statementdata 
-      VALUE(NULL,'$account','$in_balance','$trademoney','0','$in_tradetime','','$in_type','$in_note');";
-
-      mysqli_query($db_link,$sqltradeacc);
-
-      $sqlUPdateFinance= "UPDATE financedata
-                  SET m_balance= '".$in_balance."'
-                  WHERE m_account= '".$account."'; ";
-      $sqlUPdateDebit= "UPDATE debitcarddata
-                  SET m_balance= '".$in_balance."'
-                  WHERE m_account= '".$account."'; ";
-
-      mysqli_query($db_link,$sqlUPdateFinance);
-      mysqli_query($db_link,$sqlUPdateDebit);
-
-      //更新黃金資料
-      $sqlUPdateGoldData= "UPDATE golddata
-                  SET m_goldnum= '".$in_goldnum."'
-                  WHERE m_gold= '".$goldacc."'; ";
-
-      mysqli_query($db_link,$sqlUPdateGoldData);
+    if($row_accout['m_balance'] <= 0){
+      function_alert("餘額不足無法交易");
     }else{
-      $in_sellgold = "0";
-    }
+      if(!empty($_POST['g_sellgold'])){
+        $in_sellgold= $_POST['g_sellgold'];
 
-    header("location:tradegoldnext.php");
+        $goldnum = $row_acc['m_goldnum'];
+        $in_goldnum = $goldnum - $in_sellgold;
+        $trademoney = $goldprice*$in_sellgold;
+        $in_balance=  $row_accf['m_balance']+$trademoney;
+
+        date_default_timezone_set('Asia/Taipei');
+        $in_tradetime= date("Y-m-d H:i:s");
+
+        $in_type= "賣出黃金";
+        $in_note = "賣出".$in_sellgold."個黃金";
+
+        mysqli_select_db($db_link, "phpmember");
+
+        //交易紀錄、更新帳戶餘額
+        $sqltradeacc= "INSERT INTO statementdata 
+        VALUE(NULL,'$account','$in_balance','$trademoney','0','$in_tradetime','','$in_type','$in_note');";
+
+        mysqli_query($db_link,$sqltradeacc);
+
+        $sqlUPdateFinance= "UPDATE financedata
+                    SET m_balance= '".$in_balance."'
+                    WHERE m_account= '".$account."'; ";
+        $sqlUPdateDebit= "UPDATE debitcarddata
+                    SET m_balance= '".$in_balance."'
+                    WHERE m_account= '".$account."'; ";
+
+        mysqli_query($db_link,$sqlUPdateFinance);
+        mysqli_query($db_link,$sqlUPdateDebit);
+
+        //更新黃金資料
+        $sqlUPdateGoldData= "UPDATE golddata
+                    SET m_goldnum= '".$in_goldnum."'
+                    WHERE m_gold= '".$goldacc."'; ";
+
+        mysqli_query($db_link,$sqlUPdateGoldData);
+      }else{
+        $in_sellgold = "0";
+      }
+
+      header("location:tradegoldnext.php");
+    }
   }
 
   ?>

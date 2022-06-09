@@ -126,6 +126,9 @@ mysqli_select_db($db_link, "phpmember");
   //echo $_POST['onoffswitch'];
   //更新股票買進資料
 if(isset($_POST['submittradebuy'])){
+  if($row_accout['m_balance'] <= 0){
+    function_alert("餘額不足無法交易");
+  }else{
     if(!empty($companyid)){
       $in_buy= $_POST["numPostB"];
       $stocknum = $row_accs['p_stocknum'];
@@ -168,10 +171,14 @@ if(isset($_POST['submittradebuy'])){
     }else{
       function_alert("商品編號不能空白");
     }
+  }
 }
 
 if(isset($_POST['submittradesell'])){
-  if(!empty($companyid)){
+  if($row_accout['m_balance'] <= 0){
+    function_alert("餘額不足無法交易");
+  }else{
+    if(!empty($companyid)){
       $in_buy= $_POST["numPostS"];
       $stocknum = $row_accs['p_stocknum'];
       $trademoney = $stockprice*$in_buy*1000;
@@ -214,6 +221,7 @@ if(isset($_POST['submittradesell'])){
     }else{
       function_alert("商品編號不能空白");
     }
+  }
 }
 
 function function_alert($message) {
