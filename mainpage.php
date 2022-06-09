@@ -22,7 +22,9 @@ $_SESSION["stockacc"] = $f_row_Login['m_stock'];
 $levelString = array("無","用戶","管理者");
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-   $balance = $f_row_Login["m_balance"];
+  $balance = $f_row_Login["m_balance"];
+  $balance = number_format($balance);
+   
 ?>
 <!doctype html>
 <html>

@@ -90,15 +90,13 @@
     font-weight: normal;
     color: #3D3D3D;
     letter-spacing: 1px;
-	width: 200px;
-	height: 30px;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
 }
 
 .nav-link:hover, .nav-link:focus {
-    text-decoration: none;
-	border: 1px solid rgba(220, 220, 220, 0.8);
-    background-color: rgba(220, 220, 220, 0.8);
-    border-radius: 5px;
+  text-decoration: none;
+  color: #B8B8B8;
 }
 
 .clearfix {
