@@ -125,7 +125,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
       $in_buygold = "0";
     }
 
-    header("location:mainpage.php");
+    header("location:tradegoldnext.php");
   }
 
   if(isset($_POST['g_sellgold'])){
@@ -171,7 +171,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
       $in_sellgold = "0";
     }
 
-    header("location:mainpage.php");
+    header("location:tradegoldnext.php");
   }
 
   ?>
