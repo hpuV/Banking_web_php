@@ -57,7 +57,9 @@ $levelString = array("無","用戶","管理者");
 		<div class="value"><h3><?php echo $account; ?></h3></div>
 	    <div class="content"><h4>銀行帳戶</h4></div>
 		<div class="value"><h3><?php echo $username; ?></h3></div>
-	    <div class="content"><h4>使用者代號</h4></div>
+	    <div class="content"><h4>登入帳號 <?php if($_SESSION["level"]<=0){
+			echo " ###測試帳號的登入資訊無法被更改###";
+		}?></h4></div>
 		<div class="value"><h3>********</h3></div>
 	    <div class="content"><h4>密碼</h4></div>
 		<div class="value"><h3><?php echo $levelString[$levelNum]; ?></h3></div>

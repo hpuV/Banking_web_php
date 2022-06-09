@@ -80,7 +80,7 @@ function function_alert($message) {
       
     // Display the alert box  
     echo "<script>alert('$message');
-     window.location.href='index.php';
+     window.location.href='register.php';
     </script>"; 
     
     return false;

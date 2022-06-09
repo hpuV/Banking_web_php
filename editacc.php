@@ -58,31 +58,74 @@ if(isset($row_Login['m_account'])){
   $up_address= "";
 }
 
-if(isset($_POST['m_username'])){
-  $up_username= $_POST['m_username'];
-  $up_nick= $_POST['m_nick'];
-  $up_gender= $_POST['m_gender'];
-  $up_bday= $_POST['m_bday'];
-  $up_email= $_POST['m_email'];
-  $up_phone= $_POST['m_phone'];
-  $up_address= $_POST['m_address'];
+if(
+isset($_POST['m_username']) || isset($_POST['m_nick']) || isset($_POST['m_gender']) || isset($_POST['m_bday'])
+|| isset($_POST['m_email']) || isset($_POST['m_phone']) || isset($_POST['m_address'])
+){
+  if($_SESSION["level"]<=0){
+    $up_username= $row_Login['m_username'];
+    $up_nickname= $_POST['m_nick'];
+    $up_gender= $_POST['m_gender'];
+    $up_bday= $_POST['m_bday'];
+    $up_email= $_POST['m_email'];
+    $up_phone= $_POST['m_phone'];
+    $up_address= $_POST['m_address'];
 
-  $sqlUPdate= "UPDATE memberdata
-        SET m_username= '".$up_username."',
-            m_nick= '".$up_nickname."',
-            m_gender = '".$up_gender."',
-            m_birthday = '".$up_bday."',
-            m_email = '".$up_phone."',
-            m_phone = '".$up_phone."',
-            m_address = '".$up_address."'
-            WHERE m_account= '".$up_account."'; ";
+    $sqlUPdate= "UPDATE memberdata
+          SET m_username= '".$up_username."',
+              m_nick= '".$up_nickname."',
+              m_gender = '".$up_gender."',
+              m_birthday = '".$up_bday."',
+              m_email = '".$up_email."',
+              m_phone = '".$up_phone."',
+              m_address = '".$up_address."'
+              WHERE m_account= '".$up_account."'; ";
+    
+    mysqli_select_db($db_link, "phpmember");
+    if(mysqli_query($db_link,$sqlUPdate)){
+      function_alert("更改成功!");
+    }else{
+      function_alert("更改失敗!");
+    }
+  }else{
+    $up_username= $_POST['m_username'];
+    $up_nickname= $_POST['m_nick'];
+    $up_gender= $_POST['m_gender'];
+    $up_bday= $_POST['m_bday'];
+    $up_email= $_POST['m_email'];
+    $up_phone= $_POST['m_phone'];
+    $up_address= $_POST['m_address'];
+
+    $sqlUPdate= "UPDATE memberdata
+          SET m_username= '".$up_username."',
+              m_nick= '".$up_nickname."',
+              m_gender = '".$up_gender."',
+              m_birthday = '".$up_bday."',
+              m_email = '".$up_email."',
+              m_phone = '".$up_phone."',
+              m_address = '".$up_address."'
+              WHERE m_account= '".$up_account."'; ";
+    
+    mysqli_select_db($db_link, "phpmember");
+    if(mysqli_query($db_link,$sqlUPdate)){
+      function_alert("更改成功!");
+    }else{
+      function_alert("更改失敗!");
+    }
+  }
+}
+
+function function_alert($message) { 
+      
+  // Display the alert box  
+  echo "<script>alert('$message');
+   window.location.href='editacc.php';
+  </script>"; 
   
-  mysqli_select_db($db_link, "phpmember");
-  mysqli_query($db_link,$sqlUPdate);
-  header("location:usercenter.php");
+  return false;
 }
 ?>
-<form name="registerForm" method="post" action="register.php" onsubmit="return validateForm()">
+<form name="registerForm" method="post" action="" onsubmit="return validateForm()">
 <div class="container">
   <header>
 	 <nav class="primary_header" id="menu">
@@ -126,7 +169,7 @@ if(isset($_POST['m_username'])){
     <aside class="right_article">
       <div class="bg-style1">
           <h1>更改資料</h1>
-          <h2 class="lbl1">帳號</h2>
+          <h2 class="lbl1">登入帳號</h2>
           <input name="m_username" type="text" value="<?php echo $up_username;?>" class="txt">
           <h2 class="lbl1">名稱</h2>
           <input name="m_nick" type="text"  value="<?php echo $up_nickname;?>" class="txt">

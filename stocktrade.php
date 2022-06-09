@@ -226,7 +226,9 @@ if(isset($_POST['submittradesell'])){
 
 function function_alert($message) {
   // Display the alert box  
-  echo "<script>alert('$message');</script>"; 
+  echo "<script>alert('$message');
+  window.location.href='editpwd.php';
+  </script>"; 
   return false;
 }
 

@@ -127,7 +127,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
   }
 
   function function_alert($message) {
-    echo "<script>alert('$message');</script>"; 
+    echo "<script>alert('$message');
+    window.location.href='twdtransfer.php';
+    </script>"; 
     return false;
   }
 
