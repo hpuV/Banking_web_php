@@ -17,7 +17,7 @@ $row_accout = mysqli_fetch_assoc($resultout);
 <html>
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ATBC Banking</title>
 <link rel="icon" href="img/ATBClogo.ico" type="image/x-icon">
