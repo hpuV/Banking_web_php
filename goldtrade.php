@@ -40,7 +40,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content..="chrome=1">
 <meta name="viewport" content..="width=device-width, initial-scale=1">
-<title>ATBC Banking</title>
+<title>ATBC Banking - 黃金交易</title>
 <link rel="icon" href="img/ATBClogo.ico" type="image/x-icon">
 <link rel="shortcut icon" href="img/ATBClogo.ico" type="image/x-icon">
 <link href="css/goldtradestyle.css" rel="stylesheet" type="text/css">

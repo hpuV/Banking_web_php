@@ -63,7 +63,7 @@ if (isset($_GET['queryField'])) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content..="width=device-width, initial-scale=1">
-<title>ATBC Banking</title>
+<title>ATBC Banking - 收支查詢</title>
 <link rel="icon" href="img/ATBClogo.ico" type="image/x-icon">
 <link rel="shortcut icon" href="img/ATBClogo.ico" type="image/x-icon">
 <link href="css/statementsearchstyle.css" rel="stylesheet" type="text/css">

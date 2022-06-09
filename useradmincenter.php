@@ -22,7 +22,7 @@ $levelString = array("無","用戶","管理者");
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content..="width=device-width, initial-scale=1">
-<title>ATBC Banking</title>
+<title>ATBC Banking - 管理員中心</title>
 <link rel="icon" href="img/ATBClogo.ico" type="image/x-icon">
 <link rel="shortcut icon" href="img/ATBClogo.ico" type="image/x-icon">
 <link href="css/useradmincenterpagestyle.css" rel="stylesheet" type="text/css">

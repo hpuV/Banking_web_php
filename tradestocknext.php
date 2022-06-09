@@ -30,7 +30,7 @@ $row_com = mysqli_fetch_assoc($resultcom);
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ATBC Banking</title>
+<title>ATBC Banking - 股票交易成功</title>
 <link rel="icon" href="img/ATBClogo.ico" type="image/x-icon">
 <link rel="shortcut icon" href="img/ATBClogo.ico" type="image/x-icon">
 <link href="css/tradesuccessstyle.css" rel="stylesheet" type="text/css">
