@@ -45,6 +45,8 @@ if (isset($_GET['searchid'])) {
 
   $companyid = $_GET["searchid"];
   
+  $_SESSION["companyid"] = $companyid;
+
   //公司 股票資料
   $sqlcom = "SELECT * FROM stockdata WHERE s_companyid = '".$companyid."' ";
   $resultcom = mysqli_query($db_link,$sqlcom);
@@ -53,41 +55,40 @@ if (isset($_GET['searchid'])) {
   //股票編號不為空 有股票資料
   if(!empty($row_com['s_id'])){
 
-  $companyname = $row_com['s_company'];
+    $companyname = $row_com['s_company'];
 
-  //股票價格
-  //獲取最大編號
-  $sqlmaxid = "SELECT MAX(s_id) FROM stockdata WHERE s_companyid = '".$companyid."' ";
-  $resultsid = mysqli_query($db_link,$sqlmaxid);
-  $row_sid = mysqli_fetch_row($resultsid);
-  $sid = $row_sid['0'];
+    //股票價格
+    //獲取最大編號
+    $sqlmaxid = "SELECT MAX(s_id) FROM stockdata WHERE s_companyid = '".$companyid."' ";
+    $resultsid = mysqli_query($db_link,$sqlmaxid);
+    $row_sid = mysqli_fetch_row($resultsid);
+    $sid = $row_sid['0'];
 
-  //獲取價格
-  $sqlstock = "SELECT * FROM stockdata WHERE s_id = '".$sid."' ";
-  $resultstock = mysqli_query($db_link,$sqlstock);
-  $row_stock = mysqli_fetch_assoc($resultstock);
-  $stockprice = $row_stock['s_price'];
+    //獲取價格
+    $sqlstock = "SELECT * FROM stockdata WHERE s_id = '".$sid."' ";
+    $resultstock = mysqli_query($db_link,$sqlstock);
+    $row_stock = mysqli_fetch_assoc($resultstock);
+    $stockprice = $row_stock['s_price'];
 
-  $sqlcheck= "SELECT * FROM personalstockdata WHERE m_stock= '".$stockacc."' AND s_companyid= '".$companyid."' GROUP BY s_companyid HAVING count(*) > 0;";
-  $resultnorepeat = mysqli_query($db_link,$sqlcheck);
-  $row_repeat = mysqli_fetch_assoc($resultnorepeat);
-  if(!empty($row_repeat['s_companyid'])){
-    //股票資料重複
-    //echo "Data Repeat";
-  }else{
-    //股票資料沒重複
-    $sqlpersonstock="INSERT INTO personalstockdata (p_id, m_stock, m_account, s_companyid , s_company, p_stocknum)
-            VALUES (NULL ,'".$stockacc."' ,'".$account."' ,'".$companyid."' ,'".$companyname."' ,'0')";
-    mysqli_query($db_link,$sqlpersonstock);
-    //echo "Data Inserted";
-  }
+    $sqlcheck= "SELECT * FROM personalstockdata WHERE m_stock= '".$stockacc."' AND s_companyid= '".$companyid."' GROUP BY s_companyid HAVING count(*) > 0;";
+    $resultnorepeat = mysqli_query($db_link,$sqlcheck);
+    $row_repeat = mysqli_fetch_assoc($resultnorepeat);
+    if(!empty($row_repeat['s_companyid'])){
+      //股票資料重複
+      //echo "Data Repeat";
+    }else{
+      //股票資料沒重複
+      $sqlpersonstock="INSERT INTO personalstockdata (p_id, m_stock, m_account, s_companyid , s_company, p_stocknum)
+              VALUES (NULL ,'".$stockacc."' ,'".$account."' ,'".$companyid."' ,'".$companyname."' ,'0')";
+      mysqli_query($db_link,$sqlpersonstock);
+      //echo "Data Inserted";
+    }
 
   }else{
 
     $companyid = "";
     $stockprice = "0";
     $companyname = "查無資料";
-    
   }
 }
 
@@ -126,7 +127,7 @@ if(isset($_POST['submittradebuy'])){
     if(!empty($companyid)){
       $in_buy= $_POST["numPostB"];
       $stocknum = $row_accs['p_stocknum'];
-      $trademoney = $stockprice*$in_buy;
+      $trademoney = $stockprice*$in_buy*1000;
 
       date_default_timezone_set('Asia/Taipei');
       $in_tradetime= date("Y-m-d H:i:s");
@@ -161,7 +162,7 @@ if(isset($_POST['submittradebuy'])){
 
         mysqli_query($db_link,$sqlUPdateStockData);
 
-        function_alert($in_note);
+        header("location:tradestocknext.php");
     }else{
       function_alert("商品編號不能空白");
     }
@@ -171,7 +172,7 @@ if(isset($_POST['submittradesell'])){
   if(!empty($companyid)){
       $in_buy= $_POST["numPostS"];
       $stocknum = $row_accs['p_stocknum'];
-      $trademoney = $stockprice*$in_buy;
+      $trademoney = $stockprice*$in_buy*1000;
 
       date_default_timezone_set('Asia/Taipei');
       $in_tradetime= date("Y-m-d H:i:s");
@@ -207,7 +208,7 @@ if(isset($_POST['submittradesell'])){
 
       mysqli_query($db_link,$sqlUPdateStockData);
 
-      function_alert($in_note);
+      header("location:tradestocknext.php");
     }else{
       function_alert("商品編號不能空白");
     }

@@ -74,7 +74,7 @@
     margin-bottom: 0px;
 	margin-left: 55px;
     color: #797d82;
-	width: 30%;
+	width: 35%;
 	float: left;
 }
 
@@ -84,7 +84,7 @@
     margin-bottom: 0px;
 	margin-left: 55px;
     color: #797d82;
-	width: 30%;
+	width: 35%;
 	float: left;
 }
 
@@ -94,7 +94,7 @@
     margin-bottom: 0px;
 	margin-left: 0px;
     color: #969ba1;
-	width: 48%;
+	width: 43%;
 	text-align: right;
 	float: left;
 }
@@ -159,6 +159,70 @@ body {
 	margin: 0 auto;
  }
 
+.bg-style2 {
+ 	background-color: #f6e04f;
+	border-radius: 20px;
+	width: 450px;
+	height: 450px;
+	margin: 0 auto;
+ }
+
+.bg-style3 {
+ 	background-color: #f6e04f;
+	border-radius: 20px;
+	width: 450px;
+	height: 500px;
+	margin: 0 auto;
+ }
+
 .content-box{
 	height: 50px;
+}
+
+.container .left_article .h2goldt{
+	color: #c1870c;
+}
+
+.container .left_article .h2gold {
+	color: #DAA520;
+}
+
+.container .left_article .h3gold {
+	color: #c9b44b;
+}
+
+.container .left_article .hrgold {
+	background-color: #C5B358;
+	border:0;
+	height:3px;
+}
+
+.container .left_article .goldbtn {
+	background-color: #ffd700;
+    color: #ad8022;
+	box-shadow: 0px 2px 5px 1px #E6BE8A;
+}
+
+.container .left_article .h2stockt{
+    color: #3F464B;
+}
+
+.container .left_article .h2stock {
+    color: #5A5E62;
+}
+
+.container .left_article .h3stock {
+    color: #787F83;
+}
+
+.container .left_article .hrstock {
+	background-color: #7e848b;
+	border:0;
+	height:3px;
+}
+
+.container .left_article .stockbtn {
+	background-color: #0d1117;
+    color: #c9d1d9;
+    box-shadow: 0px 2px 5px 1px #c4ccd5;
 }
