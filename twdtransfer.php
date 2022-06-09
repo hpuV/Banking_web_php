@@ -70,6 +70,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     date_default_timezone_set('Asia/Taipei');
     $in_tradetime= date("Y-m-d H:i:s");
 
+    //session 資料
+    $_SESSION["amounttwd"] = $in_amount;
+
     //轉入帳號資料
     $account = $_SESSION["account"];
     $sqlin = "SELECT * FROM financedata WHERE m_account = '".$in_accin."' ";
@@ -112,7 +115,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 
     mysqli_query($db_link,$sqlUPdateFinanceIn);
     mysqli_query($db_link,$sqlUPdateDebitIn);
-    header("location:mainpage.php");
+    header("location:tradetwdnext.php");
   }
 
   ?>
