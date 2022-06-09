@@ -95,7 +95,6 @@ function function_alert($message) {
 <title>ATBC Banking</title>
 <link rel="icon" href="img/ATBClogo.ico" type="image/x-icon">
 <link rel="shortcut icon" href="img/ATBClogo.ico" type="image/x-icon">
-<link href="css/mainpagestyle.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
     function validateForm() {
                 var x = document.forms["registerForm"]["password"].value;
