@@ -27,6 +27,9 @@
 
 .clearfix {
 	clear: both;
+	visibility: hidden;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 .lbl-link {
@@ -42,7 +45,7 @@
 }
 
 .left_article {
-	background-color: #e9ecef;;
+	background-color: #e9ecef;
 	width: 100%;
 	float: center;
 	padding-left: 0px;
@@ -56,7 +59,7 @@
 .container .left_article h1{
     font-size: 40px;
     text-align: center;
-    margin-top: 45%;
+    margin-top: 30%;
     margin-bottom: 0px;
     padding-top: 2%;
     color: #777777;
@@ -111,7 +114,6 @@
     width: 90%;
     height: 30px;
     border-color: transparent;
-    box-shadow: 3px 3px 5px 6px #BBBBBB;
     background-color: #AAAAAA;
     color: #FFFFFF;
     box-shadow: 0px 2px 5px 1px #BBBBBB;
@@ -156,5 +158,80 @@ body {
  }
 
 .content-box{
-	height: 280px;
+	height: 50px;
+}
+
+.container .left_article .testaccfield{
+    height: 100px;
+    width: 250px;
+    border:8px solid #FFFFFF;
+	border-radius: 10px;
+    position: absolute;     /*絕對位置*/
+    top: 68%;               /*從上面開始算，下推 50% (一半) 的位置*/
+    left: 81%;              /*從左邊開始算，右推 50% (一半) 的位置*/
+    margin-top: -100px;     /*高度的一半*/
+    margin-left: -200px;    /*寬度的一半*/
+	background-color: #bdc1c6;
+}
+
+.container .left_article .testaccfield .val{
+	margin-left: 15px;
+	line-height: 30px;
+	margin-top: 5px;
+	margin-bottom: 0px;
+	width: 130px;
+	color: #888888;
+	float: left;
+	font-size: 25px;
+	text-align: left;
+}
+
+.container .left_article .testaccfield .con{
+	margin-left: 20px;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	width: 80px;
+	color: #969ba1;
+	float: left;
+	text-align: left;
+}
+
+.container .left_article .leftp{
+	width: 42%;
+    float: left;
+}
+
+.container .left_article .rightp {
+	width: 41%;
+    float: left;
+	text-align: right;
+}
+
+.testacc-link {
+	transition: all 0.3s linear;
+    text-decoration: none;
+    font-family: "Source Sans Pro";
+    font-weight: normal;
+    color: #3D3D3D;
+    letter-spacing: 1px;
+	margin-left: 10px;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+	
+}
+	
+.testacc-link:hover, .testacc-link:focus {
+    text-decoration: none;
+    color: #9D9D9D;
+}
+
+.testaccfield{ /*隱藏次選單*/
+    display: none;
+}
+
+
+.testacc:hover .testaccfield { /* 滑鼠滑入展開次選單*/
+	display: block;
 }
