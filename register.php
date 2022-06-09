@@ -92,7 +92,10 @@ function function_alert($message) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>註冊頁面</title>
+<title>ATBC Banking</title>
+<link rel="icon" href="img/ATBClogo.ico" type="image/x-icon">
+<link rel="shortcut icon" href="img/ATBClogo.ico" type="image/x-icon">
+<link href="css/mainpagestyle.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
     function validateForm() {
                 var x = document.forms["registerForm"]["password"].value;
