@@ -64,7 +64,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 		<div class="value"><h4><?php echo $nick; ?></h4></div>
 	    <div class="content"><h3>黃金帳戶</h3></div>
 		<div class="value"><h4><?php echo $goldacc; ?></h4></div>
-		<div class="content"><h3>持有數量</h3></div>
+		<div class="content"><h3>持有數量(單位: 公克)</h3></div>
 		<div class="value"><h4><?php echo $row_acc['m_goldnum']; ?></h4></div>
 		<div class="box"></div>
 		<a href="goldtrade.php?"><input type="button" value="黃金交易" class= "btn"></a>

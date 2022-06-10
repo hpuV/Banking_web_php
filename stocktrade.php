@@ -126,7 +126,7 @@ mysqli_select_db($db_link, "phpmember");
   //echo $_POST['onoffswitch'];
   //更新股票買進資料
 if(isset($_POST['submittradebuy'])){
-  if($row_accout['m_balance'] <= 0){
+  if($row_accf['m_balance'] <= 0){
     function_alert("餘額不足無法交易");
   }else{
     if(!empty($companyid)){
@@ -137,9 +137,11 @@ if(isset($_POST['submittradebuy'])){
       date_default_timezone_set('Asia/Taipei');
       $in_tradetime= date("Y-m-d H:i:s");
 
-        $in_stocknum = $stocknum + $in_buy;
-        $in_balance=  $row_accf['m_balance']-$trademoney;
-
+      $in_stocknum = $stocknum + $in_buy;
+      $in_balance=  $row_accf['m_balance']-$trademoney;
+      if($in_balance < 0){
+        function_alert("餘額不足無法交易");
+      }else{
         $in_type= "買進股票";
         $in_note = "買進".$companyname."股票".$in_buy."張";
 
@@ -168,6 +170,7 @@ if(isset($_POST['submittradebuy'])){
         mysqli_query($db_link,$sqlUPdateStockData);
 
         header("location:tradestocknext.php");
+        }
     }else{
       function_alert("商品編號不能空白");
     }
@@ -175,59 +178,59 @@ if(isset($_POST['submittradebuy'])){
 }
 
 if(isset($_POST['submittradesell'])){
-  if($row_accout['m_balance'] <= 0){
-    function_alert("餘額不足無法交易");
-  }else{
     if(!empty($companyid)){
       $in_buy= $_POST["numPostS"];
       $stocknum = $row_accs['p_stocknum'];
-      $trademoney = $stockprice*$in_buy*1000;
+      if($stocknum < 1){
+        function_alert("股數少於1股，無法賣出");
+      }else{
+        $trademoney = $stockprice*$in_buy*1000;
 
-      date_default_timezone_set('Asia/Taipei');
-      $in_tradetime= date("Y-m-d H:i:s");
+        date_default_timezone_set('Asia/Taipei');
+        $in_tradetime= date("Y-m-d H:i:s");
+        
+        $in_stocknum = $stocknum - $in_buy;
+        //echo $in_stocknum;
+        $in_balance=  $row_accf['m_balance']+$trademoney;
+
+        $in_type= "賣出股票";
+        $in_note = "賣出".$companyname."股票".$in_buy."張";
       
-      $in_stocknum = $stocknum - $in_buy;
-      //echo $in_stocknum;
-      $in_balance=  $row_accf['m_balance']+$trademoney;
+        //更新帳戶餘額
+        $sqlUPdateFinance= "UPDATE financedata
+                    SET m_balance= '".$in_balance."'
+                    WHERE m_account= '".$account."'; ";
+        $sqlUPdateDebit= "UPDATE debitcarddata
+                    SET m_balance= '".$in_balance."'
+                    WHERE m_account= '".$account."'; ";
+      
+        mysqli_query($db_link,$sqlUPdateFinance);
+        mysqli_query($db_link,$sqlUPdateDebit);
+      
+        //交易紀錄
+        $sqltradeacc= "INSERT INTO statementdata 
+        VALUE('','$account','$in_balance','$trademoney','0','$in_tradetime','','$in_type','$in_note');";
+      
+        mysqli_query($db_link,$sqltradeacc);
 
-      $in_type= "賣出股票";
-      $in_note = "賣出".$companyname."股票".$in_buy."張";
-    
-      //更新帳戶餘額
-      $sqlUPdateFinance= "UPDATE financedata
-                  SET m_balance= '".$in_balance."'
-                  WHERE m_account= '".$account."'; ";
-      $sqlUPdateDebit= "UPDATE debitcarddata
-                  SET m_balance= '".$in_balance."'
-                  WHERE m_account= '".$account."'; ";
-    
-      mysqli_query($db_link,$sqlUPdateFinance);
-      mysqli_query($db_link,$sqlUPdateDebit);
-    
-      //交易紀錄
-      $sqltradeacc= "INSERT INTO statementdata 
-      VALUE('','$account','$in_balance','$trademoney','0','$in_tradetime','','$in_type','$in_note');";
-    
-      mysqli_query($db_link,$sqltradeacc);
+        //更新股票資料
+        $sqlUPdateStockData= "UPDATE personalstockdata
+                    SET p_stocknum = '".$in_stocknum."'
+                    WHERE m_stock= '".$stockacc."' AND s_companyid= '".$companyid."'; ";
 
-      //更新股票資料
-      $sqlUPdateStockData= "UPDATE personalstockdata
-                  SET p_stocknum = '".$in_stocknum."'
-                  WHERE m_stock= '".$stockacc."' AND s_companyid= '".$companyid."'; ";
+        mysqli_query($db_link,$sqlUPdateStockData);
 
-      mysqli_query($db_link,$sqlUPdateStockData);
-
-      header("location:tradestocknext.php");
+        header("location:tradestocknext.php");
+      }
     }else{
       function_alert("商品編號不能空白");
     }
-  }
 }
 
 function function_alert($message) {
   // Display the alert box  
   echo "<script>alert('$message');
-  window.location.href='editpwd.php';
+  window.location.href='stocktrade.php';
   </script>"; 
   return false;
 }
@@ -266,7 +269,7 @@ function function_alert($message) {
     <form action="" method="get">
 		<h2>證券交易</h2>
 	    <div class="content"><h3>持股編號</h3></div>
-		<div class="value"><h4>stockacc</h4></div>
+		<div class="value"><h4><?php echo $stockacc;?></h4></div>
 		<div class="content"><h3>商品</h3></div>
 		<div class="value"><h4><?php echo $companyname;?></h4></div>
 		<input name="searchid" type="text"  placeholder="請輸入商品編號" value="<?php echo $companyid;?>" class="searchtxt">

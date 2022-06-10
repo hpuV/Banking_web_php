@@ -88,6 +88,8 @@
 	float: left;
 }
 
+
+
 .container .left_article .lbl2 {
 	font-size: 20px;
     margin-top: 20px;
@@ -225,4 +227,20 @@ body {
 	background-color: #0d1117;
     color: #c9d1d9;
     box-shadow: 0px 2px 5px 1px #c4ccd5;
+}
+
+.container .left_article .h2stockbg{
+    width: 35%;
+}
+
+.container .left_article .h3stockbg{
+    width: 53%;
+}
+
+.container .left_article .h3stocksm {
+    width: 43%;
+}
+
+.container .left_article .h2stocksm {
+    width: 25%;
 }

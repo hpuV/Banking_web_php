@@ -45,15 +45,15 @@ $row_com = mysqli_fetch_assoc($resultcom);
 		  <h2 class="lbl1top h2stock">持股編號</h2>
 		  <h3 class="lbl2 h3stock"><?php echo $accstock; ?></h3>
 		  <h4></h4>
-		  <h2 class="lbl1 h2stock"><?php echo $row_com['s_company']; ?>股數</h2>
-		  <h3 class="lbl2 h3stock"><?php echo $row_com['p_stocknum']; ?></h3>
+		  <h2 class="lbl1 h2stock h2stockbg"><?php echo $row_com['s_company']; ?>股數</h2>
+		  <h3 class="lbl2 h3stock h3stocksm"><?php echo $row_com['p_stocknum']; ?></h3>
 		  <h4></h4>
 		  <hr class="hrstock">
 		  <h2 class="lbl1 h2stock">交易日期</h2>
 		  <h3 class="lbl2 h3stock"><?php echo $row_accout['st_tradetime']; ?></h3>
 		  <h4></h4>
-		  <h2 class="lbl1 h2stock">交易明細</h2>
-		  <h3 class="lbl2 h3stock"><?php echo $row_accout['st_tradenote']; ?></h3>
+		  <h2 class="lbl1 h2stock h2stocksm">交易明細</h2>
+		  <h3 class="lbl2 h3stock h3stockbg"><?php echo $row_accout['st_tradenote']; ?></h3>
 		  <h4></h4>
 		  <h2 class="lbl1 h2stock">臺幣餘額</h2>
 		  <h3 class="lbl2 h3stock"><?php echo $row_accout['m_balance']; ?></h3>
