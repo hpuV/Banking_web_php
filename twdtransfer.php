@@ -47,6 +47,8 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
             </li>
             <li><a href="statementsearch.php">收支查詢</a>
             </li>
+            <li><a href="mybalance.php">我的臺幣</a>
+            </li>
             <li><a href="logout.php">登出</a>
             </li>
           </ul>

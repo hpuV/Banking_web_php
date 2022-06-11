@@ -255,6 +255,8 @@ function function_alert($message) {
             </li>
             <li><a href="statementsearch.php">收支查詢</a>
             </li>
+            <li><a href="stockcenter.php">個人股倉</a>
+            </li>
             <li><a href="logout.php">登出</a>
             </li>
           </ul>
