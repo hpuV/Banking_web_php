@@ -261,6 +261,7 @@ function function_alert($message) {
         </li>
       </ul>
     </nav>
+    <div class="clearfix"></div>
   </header>
   <section>
 	<div class="top-box"></div>

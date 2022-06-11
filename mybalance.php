@@ -55,6 +55,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         </li>
       </ul>
     </nav>
+    <div class="clearfix"></div>
   </header>
   <section>
 	<div class="top-box"></div>

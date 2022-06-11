@@ -21,7 +21,6 @@
 }
 
 .primary_header .h1title {
-	width: 88%;
 	list-style: none;
 	float: left;
 	margin-top: 0px;
@@ -35,21 +34,22 @@
   	white-space: nowrap;
 }
 
-
-
 .primary_header ul { /* 取消ul預設的內縮及樣式 */
     margin: 0;
     padding: 0;
     list-style: none;
-		
+}
+
+.primary_header .drop-down-menu{
+	float: right;
+	margin-right: 20px;
 }
 
 ul.drop-down-menu {
-    /*border: #3C3D3E 1px solid;*/
     display: inline-block;
     font-family: 'Open Sans', Arial, sans-serif;
     font-size: 13px;
-	/*text-align: right;*/
+	text-align: right;
 }
 
 .drop-down-menu img{
