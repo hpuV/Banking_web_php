@@ -36,6 +36,20 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 <link rel="icon" href="img/ATBClogo.ico" type="image/x-icon">
 <link rel="shortcut icon" href="img/ATBClogo.ico" type="image/x-icon">
 <link href="css/mainpagestyle.css" rel="stylesheet" type="text/css">
+<script>
+	var oTimerId;
+	function Timeout(){
+		alert("您好\n登入超時(1440秒未操作)，請重新登入\n謝謝!");
+		location.href= ('logout.php');
+	}
+	function ReCalculate(){
+		clearTimeout(oTimerId);
+		oTimerId = setTimeout('Timeout()', 24 * 60 * 1000); //js 是用毫秒計算，設定24min(1440sec)
+	}
+	document.onmousedown = ReCalculate;
+	document.onmousemove = ReCalculate;
+	ReCalculate();
+</script>
 </head>
 <body>
 <div class="container">
