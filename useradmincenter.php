@@ -13,7 +13,9 @@ $sql = "SELECT * FROM memberdata WHERE m_account = '".$account."' ";
 $result = mysqli_query($db_link,$sql);
  $row_Login = mysqli_fetch_assoc($result);
 
-$levelString = array("無","用戶","管理者");
+$levelString = array("無","用戶","管理員","最高權限");
+
+$levelString = array("無","用戶","管理員","最高權限");
 
 ?>
 <!doctype html>

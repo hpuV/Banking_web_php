@@ -19,7 +19,7 @@ $f_row_Login = mysqli_fetch_assoc($f_result);
 $_SESSION["goldacc"] = $f_row_Login['m_gold'];
 $_SESSION["stockacc"] = $f_row_Login['m_stock'];
 
-$levelString = array("無","用戶","管理者");
+$levelString = array("無","用戶","管理員","最高權限");
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
   $balance = $f_row_Login["m_balance"];

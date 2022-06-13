@@ -4,7 +4,7 @@ include('connect.php');
 
 session_start();
 
-$levelString = array("無","用戶","管理者");
+$levelString = array("無","用戶","管理員","最高權限");
 
 if (isset($_GET['queryString'])) {
     $queryField = $_GET["queryField"];
