@@ -122,7 +122,7 @@ if(isset($_POST['addsell'])){
   $_SESSION["stocksellnum"] = $_POST["numPostS"]+1;
 }
 
-mysqli_select_db($db_link, "phpmember");
+mysqli_select_db($db_link, "cbe109013_bankingweb");
   //echo $_POST['onoffswitch'];
   //更新股票買進資料
 if(isset($_POST['submittradebuy'])){

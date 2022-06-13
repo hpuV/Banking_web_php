@@ -81,7 +81,6 @@ isset($_POST['m_username']) || isset($_POST['m_nick']) || isset($_POST['m_gender
               m_address = '".$up_address."'
               WHERE m_account= '".$up_account."'; ";
     
-    mysqli_select_db($db_link, "phpmember");
     if(mysqli_query($db_link,$sqlUPdate)){
       function_alert("更改成功!");
     }else{
@@ -106,7 +105,7 @@ isset($_POST['m_username']) || isset($_POST['m_nick']) || isset($_POST['m_gender
               m_address = '".$up_address."'
               WHERE m_account= '".$up_account."'; ";
     
-    mysqli_select_db($db_link, "phpmember");
+    mysqli_select_db($db_link, "cbe109013_bankingweb");
     if(mysqli_query($db_link,$sqlUPdate)){
       function_alert("更改成功!");
     }else{

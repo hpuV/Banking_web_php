@@ -49,7 +49,6 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['
       $de_account = $_SESSION["sess_account"];
       //echo $de_id;
       $sqlDelete= "DELETE FROM memberdata WHERE m_account = '".$de_account."'";
-      mysqli_select_db($db_link, "phpmember");
 
       if(array_key_exists("yes",$_POST)){
         mysqli_query($db_link,$sqlDelete);

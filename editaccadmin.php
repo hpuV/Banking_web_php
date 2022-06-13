@@ -74,7 +74,6 @@ if(isset($_GET['dataid'])){
                 m_nick= '.$up_nickname.',
                 WHERE m_account= '.$up_account.'; ";
       
-      mysqli_select_db($db_link, "phpmember");
       mysqli_query($db_link,$sqlUPdate);
       header("location:editaccadmin.php");
     }

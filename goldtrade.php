@@ -108,8 +108,6 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
           $in_type= "買進黃金";
           $in_note = "買進".$in_buygold."個黃金";
 
-          mysqli_select_db($db_link, "phpmember");
-
           //交易紀錄、更新帳戶餘額
           $sqltradeacc= "INSERT INTO statementdata 
           VALUE(NULL,'$account','$in_balance','0','$trademoney','$in_tradetime','','$in_type','$in_note');";
@@ -165,7 +163,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
           $in_type= "賣出黃金";
           $in_note = "賣出".$in_sellgold."個黃金";
 
-          mysqli_select_db($db_link, "phpmember");
+          mysqli_select_db($db_link, "cbe109013_bankingweb");
 
           //交易紀錄、更新帳戶餘額
           $sqltradeacc= "INSERT INTO statementdata 

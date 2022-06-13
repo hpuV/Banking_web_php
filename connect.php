@@ -41,7 +41,7 @@ if(!$db_link){
     //echo "Connected!";
 }*/
 
-$db = mysqli_select_db($db_link, "cbe109013_bankingweb");
+mysqli_select_db($db_link, "cbe109013_bankingweb");
 
 
 ?>
