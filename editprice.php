@@ -51,6 +51,7 @@ if(isset($_GET['dataid'])){
 		<h3><a class="nav-info" href="editaccadmin.php">會員管理</a></h3>
 		<h3><a class="nav-info" href="createacc.php">新增會員</a></h3>
 		<h3><a class="nav-info" href="searchresult.php">查詢會員</a></h3>
+    <h3><a class="nav-info" href="editprice.php">更新股票</a></h3>
 	</article>
   <?php
 
@@ -116,7 +117,7 @@ if(isset($_GET['dataid'])){
   <aside class="right_article">
   <form action="" method="get">
 	<div class="bg-style1">
-		<h1>更新股票價格</h1>
+		<h1>更新股票價格(獲取API)</h1>
 		  <h2 class="lbl2"><?php echo $msg;?></h2>
 		  <input type="submit" value="更新" name="submit" class="updatebtn">
      </div>

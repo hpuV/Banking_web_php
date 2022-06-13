@@ -136,6 +136,7 @@ mysqli_close($db_link); // 連線結束
 		<h3><a class="nav-info" href="editaccadmin.php">會員管理</a></h3>
 		<h3><a class="nav-info" href="createacc.php">新增會員</a></h3>
 		<h3><a class="nav-info" href="searchresult.php">查詢會員</a></h3>
+        <h3><a class="nav-info" href="editprice.php">更新股票</a></h3>
 	</article>
     <aside class="right_article">
 	<div class="bg-style1">
