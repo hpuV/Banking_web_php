@@ -7,16 +7,6 @@ session_start();
 $sqlcompanyid = "SELECT * FROM stockdata ORDER BY s_id ASC;";
 $resultsid = mysqli_query($db_link,$sqlcompanyid);
 
-function get_Stock_price(){
-  $url =
-  "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_2330.tw&";
-  $data = file_get_contents($url);
-  $data = json_decode($data,true);
-  echo $data['msgArray'][0]['z'];
-  
-}
-
-
 ?>
 <!doctype html>
 <html>

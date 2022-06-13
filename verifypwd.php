@@ -17,7 +17,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
       $up_password= $_POST['new_password'];
       $sqlUPdate= "UPDATE memberdata SET m_password = '".$up_password."' WHERE m_account= '".$account."';";
       
-      mysqli_select_db($db_link, "cbe109013_bankingweb");
       $updateDB = mysqli_query($db_link,$sqlUPdate);
       if($updateDB){
         header("location: verifypwdsuccess.php");
