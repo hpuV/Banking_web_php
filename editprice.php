@@ -74,11 +74,11 @@ if(isset($_GET['dataid'])){
     date_default_timezone_set('Asia/Taipei');
     $tradetime= date("Y-m-d H:i:s");
 
-    $up_2330 = get_Stock_price(2330);
-    $up_3008 = get_Stock_price(3008);
-    $up_2409 = get_Stock_price(2409);
-    $up_2603 = get_Stock_price(2603);
-    $up_0050 = get_Stock_price(0050);
+    $up_2330 = get_Stock_price('2330');
+    $up_3008 = get_Stock_price('3008');
+    $up_2409 = get_Stock_price('2409');
+    $up_2603 = get_Stock_price('2603');
+    $up_0050 = get_Stock_price('0050');
     
     $sqlUP2330 = "UPDATE stockdata
               SET s_price= '".$up_2330."',
