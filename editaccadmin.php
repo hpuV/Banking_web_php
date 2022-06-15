@@ -11,7 +11,6 @@ if(isset($_GET['dataid'])){
   $row_Login = mysqli_fetch_assoc($result);
 
   $up_account = $row_Login['m_account'];
-  $_SESSION["sess_account"] = $up_account;
 }
 ?>
 <!doctype html>
@@ -53,7 +52,7 @@ if(isset($_GET['dataid'])){
 		<h3><a class="nav-info" href="searchresult.php">查詢會員</a></h3>
 	</article>
   <?php
-    if(isset($up_account)){
+    if(!empty($up_account)){
       $up_id= $row_Login['m_id'];
       $up_username= $row_Login['m_username'];
       $up_nickname= $row_Login['m_nick'];
@@ -71,11 +70,24 @@ if(isset($_GET['dataid'])){
       $sqlUPdate= "UPDATE memberdata
             SET m_username= '.$up_username.',
                 m_level= '.$up_level.',
-                m_nick= '.$up_nickname.',
+                m_nick= '.$up_nick.',
                 WHERE m_account= '.$up_account.'; ";
       
-      mysqli_query($db_link,$sqlUPdate);
-      header("location:editaccadmin.php");
+      if(mysqli_query($db_link,$sqlUPdate)){
+        function_alert("更改成功!");
+      }else{
+        function_alert("更改失敗!");
+      }
+      
+    }
+
+    function function_alert($message) { 
+      
+      echo "<script>alert('$message');
+       window.location.href='editaccadmin.php';
+      </script>"; 
+      
+      return false;
     }
   ?>
   <aside class="right_article">

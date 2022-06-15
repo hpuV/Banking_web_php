@@ -51,14 +51,26 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['
       $sqlDelete= "DELETE FROM memberdata WHERE m_account = '".$de_account."'";
 
       if(array_key_exists("yes",$_POST)){
-        mysqli_query($db_link,$sqlDelete);
-        header("location:editaccadmin.php");
+        if(mysqli_query($db_link,$sqlDelete)){
+          function_alert("刪除成功!");
+        }else{
+          function_alert("刪除失敗!");
+        }
       }
 
       if(array_key_exists("no",$_POST)){
         header("location:editaccadmin.php");
       }
 
+
+      function function_alert($message) { 
+      
+        echo "<script>alert('$message');
+         window.location.href='editaccadmin.php';
+        </script>"; 
+        
+        return false;
+      }
     ?>
   <section>
   <form method="post">

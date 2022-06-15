@@ -80,7 +80,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['
             VALUE(NULL,'$in_account','$in_username','$in_password','$in_nickname','$in_level','$in_gender','$in_bday','$in_email','$in_phone','$in_address');";
 
     if(mysqli_query($db_link,$sql)){
-      function_alert("Create Account Successfully!");
+      function_alert("新增會員成功!");
     }else{
       function_alert("Error creating table: ".mysqli_error($db_link));
     }
@@ -102,7 +102,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['
 		  <h2 class="lbl1">帳號</h2>
 		  <input type="text" name="username" class="txt">
 		  <h2 class="lbl1">密碼</h2>
-		  <input type="password" name="username" class="txt">
+		  <input type="password" name="password" class="txt">
 		  <h2 class="lbl2">等級</h2>
 		  <select name="level" class="select">
           <option value="0">無</option>
