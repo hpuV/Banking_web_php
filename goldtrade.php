@@ -81,10 +81,6 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 	<div class="top-box"></div>
   <aside class="right_article">
   <?php
-  }else{
-    echo "非法登入!";
-    exit();
-  }
 
   if(isset($_POST['g_buygold'])){
     if($row_accf['m_balance'] <= 0){
@@ -251,3 +247,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 </div>
 </body>
 </html>
+<?php
+  }else{
+    echo "非法登入!";
+    exit();
+  }
+?>

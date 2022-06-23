@@ -6,6 +6,8 @@ session_start();
 
 $levelString = array("無","用戶","管理員","最高權限");
 
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+
 if (isset($_GET['queryString'])) {
     $queryField = $_GET["queryField"];
     $keyWord = $_GET["queryString"];
@@ -97,6 +99,7 @@ if (isset($_GET['queryString'])) {
 }
 
 mysqli_close($db_link); // 連線結束
+
 
 ?>
 <!doctype html>
@@ -226,3 +229,9 @@ mysqli_close($db_link); // 連線結束
 </div>
 </body>
 </html>
+<?php
+  }else{
+    echo "非法登入!";
+    exit();
+  }
+?>

@@ -4,6 +4,8 @@ include('connect.php');
 
 session_start();
 
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['level']>=2){
+
 if(isset($_GET['dataid'])){
   $dataid = $_GET['dataid'];
   $sql = "SELECT * FROM memberdata WHERE m_id = '".$dataid."' ";
@@ -132,3 +134,9 @@ if(isset($_GET['dataid'])){
 </div>
 </body>
 </html>
+<?php
+    }else{
+        echo "非法登入!";
+        exit();
+      }
+?>

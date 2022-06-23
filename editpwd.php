@@ -1,3 +1,7 @@
+<?php
+
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+?>
 <!doctype html>
 <html>
 <head>
@@ -138,3 +142,9 @@
 		}
 	</script>
 </html>
+<?php
+    }else{
+        echo "非法登入!";
+        exit();
+      }
+?>

@@ -33,10 +33,6 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 </head>
 <body>
 <?php
-}else{
-  echo "非法登入!";
-  exit();
-}
 
 $companyid = "";
 $stockprice = "0";
@@ -322,3 +318,9 @@ function function_alert($message) {
 </div>
 </body>
 </html>
+<?php
+  }else{
+    echo "非法登入!";
+    exit();
+  }
+?>

@@ -1,5 +1,9 @@
 <?php
+	session_start();
+
 	header("Refresh: 10; url=editpwd.php");
+
+	if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 ?>
 <!doctype html>
 <html>
@@ -31,3 +35,9 @@
 </div>
 </body>
 </html>
+<?php
+}else{
+	echo "非法登入!";
+	exit();
+  }
+?>

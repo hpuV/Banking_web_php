@@ -9,6 +9,7 @@ $sql = "SELECT * FROM memberdata WHERE m_account = '".$account."' ";
 $result = mysqli_query($db_link,$sql);
 $row_Login = mysqli_fetch_assoc($result);
 
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 ?>
 <!doctype html>
 <html>
@@ -202,3 +203,9 @@ function function_alert($message) {
 </form>
 </body>
 </html>
+<?php
+    }else{
+        echo "非法登入!";
+        exit();
+      }
+?>

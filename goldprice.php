@@ -12,6 +12,7 @@ $row_gold = mysqli_fetch_assoc($resultgold);
 $stockprice = $row_gold['g_price'];
 $updatetime = $row_gold['g_date'];
 
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 ?>
 <!doctype html>
 <html>
@@ -73,3 +74,9 @@ $updatetime = $row_gold['g_date'];
 </div>
 </body>
 </html>
+<?php
+}else{
+  echo "非法登入!";
+  exit();
+ }
+?>

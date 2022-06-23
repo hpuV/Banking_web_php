@@ -6,6 +6,8 @@ session_start();
 
 $levelString = array("無","用戶","管理員","最高權限");
 
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+
 $account= $_SESSION["account"];
 $keyWord1 = "";
 $fieldString = "";
@@ -56,6 +58,7 @@ if (isset($_GET['queryField'])) {
     $pageFirst= "?queryField=$fieldString&sday=$keyWord2&submit=搜尋&page=1";
     $pageList= "?queryField=$fieldString&sday=$keyWord2&submit=搜尋&page=";
 
+    
 ?>
 <!doctype html>
 <html>
@@ -158,3 +161,9 @@ if (isset($_GET['queryField'])) {
 </div>
 </body>
 </html>
+<?php
+  }else{
+    echo "非法登入!";
+    exit();
+  }
+?>

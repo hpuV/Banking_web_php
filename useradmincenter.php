@@ -17,6 +17,8 @@ $levelString = array("無","用戶","管理員","最高權限");
 
 $levelString = array("無","用戶","管理員","最高權限");
 
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION['level']>=2){
+
 ?>
 <!doctype html>
 <html>
@@ -93,3 +95,9 @@ $levelString = array("無","用戶","管理員","最高權限");
 </div>
 </body>
 </html>
+<?php
+  }else{
+    echo "非法登入!";
+    exit();
+  }
+?>

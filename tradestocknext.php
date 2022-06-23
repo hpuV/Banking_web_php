@@ -3,6 +3,8 @@ include('connect.php');
 
 session_start();
 
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+
 $companyid = $_SESSION["companyid"];
 
 $account = $_SESSION["account"];
@@ -71,3 +73,9 @@ $row_com = mysqli_fetch_assoc($resultcom);
 </div>
 </body>
 </html>
+<?php
+  }else{
+    echo "非法登入!";
+    exit();
+  }
+?>

@@ -68,11 +68,6 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 		<div class="box"></div>
 		<a href="stocktrade.php"><input type="submit" value="股票交易" class= "btn"></a>
     <?php
-      }else{
-        echo "非法登入!";
-        exit();
-      }
-
         $queryString = "SELECT * FROM personalstockdata WHERE m_stock = '".$stockacc."'  ORDER BY p_id ASC";
         $result = mysqli_query($db_link,$queryString);
     ?>
@@ -109,3 +104,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 </div>
 </body>
 </html>
+<?php
+}else{
+  echo "非法登入!";
+  exit();
+}
+?>

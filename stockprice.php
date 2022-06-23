@@ -4,6 +4,8 @@ include('connect.php');
 
 session_start();
 
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+  
 $sqlcompanyid = "SELECT * FROM stockdata ORDER BY s_id ASC;";
 $resultsid = mysqli_query($db_link,$sqlcompanyid);
 
@@ -71,3 +73,9 @@ $resultsid = mysqli_query($db_link,$sqlcompanyid);
 </div>
 </body>
 </html>
+<?php
+}else{
+  echo "非法登入!";
+  exit();
+}
+?>

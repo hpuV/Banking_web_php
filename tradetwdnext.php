@@ -3,6 +3,8 @@ include('connect.php');
 
 session_start();
 
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+
 $account = $_SESSION["account"];
 $sqlmax = "SELECT MAX(st_id) FROM statementdata";
 $resultmax = mysqli_query($db_link,$sqlmax);
@@ -63,3 +65,9 @@ $row_accout = mysqli_fetch_assoc($resultout);
 </div>
 </body>
 </html>
+<?php
+  }else{
+    echo "非法登入!";
+    exit();
+  }
+?>
